@@ -17,7 +17,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.SERVER_ADDRESS }}
         REMOTE_USER: ${{ secrets.USER_NAME }}
         REMOTE_PORT: 22
-        TARGET: /root/teachme
+        TARGET: /root/teachme/blog
         EXCLUDE: /.git/
         SCRIPT_AFTER: |
           cd /root/teachme

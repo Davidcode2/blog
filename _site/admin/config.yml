@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: master
+  branch: main
   repo: davidcode2/blog
 media_folder: "_site/images/uploads"
 public_folder: "/images/uploads"
