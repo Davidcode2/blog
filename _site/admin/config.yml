@@ -1,8 +1,8 @@
 backend:
   name: github
   branch: master
-  repo: davidcode2/teachme
-media_folder: "blog/_site/images/uploads"
+  repo: davidcode2/blog
+media_folder: "_site/images/uploads"
 public_folder: "/images/uploads"
 
 # Please run "npx netlify-cms-proxy-server" for local backend
@@ -11,7 +11,7 @@ local_backend: false
 collections:
   - label: "Post"
     name: "blog"
-    folder: "blog/posts"
+    folder: "posts"
     create: true
     editor:
       preview: false
