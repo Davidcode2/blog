@@ -1,0 +1,8 @@
+node_modules/
+_site/posts
+_site/index.html 
+_site/css
+
+*.cmapx
+*_filelist
+*_00*.png

@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+---
+
+{# List every content page in the project #}
+<ul class="[&>*]:hover:text-purple-800 px-8 pt-4">
+	{%- for post in collections.post %}
+	<li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+	{%- endfor %}
+</ul>
