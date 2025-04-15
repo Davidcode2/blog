@@ -1,0 +1,21 @@
+backend:
+  name: github
+  branch: main
+  repo: davidcode2/blog
+media_folder: "_site/images/uploads"
+public_folder: "/images/uploads"
+
+# Please run "npx netlify-cms-proxy-server" for local backend
+local_backend: false
+# publish_mode: editorial_workflow
+collections:
+  - label: "Post"
+    name: "blog"
+    folder: "posts"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }

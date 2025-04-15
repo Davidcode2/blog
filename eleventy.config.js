@@ -1,8 +1,7 @@
 import { DateTime } from "luxon";
 import markdownit from "markdown-it";
-import hljs from "highlight.js"; // https://highlightjs.org
+import hljs from "highlight.js"; 
 import plantUmlPlugin from "./_11ty/plantuml.js";
-import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 export default function (eleventyConfig) {
@@ -15,6 +14,8 @@ export default function (eleventyConfig) {
     }
     return dateObj.toFormat(format);
   });
+
+  eleventyConfig.addPassthroughCopy("admin");
 
   // Actual default values
   const md = markdownit({
