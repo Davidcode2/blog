@@ -22,6 +22,5 @@ jobs:
         SCRIPT_AFTER: |
           cd /root/teachme
           docker compose build blog || exit 1
-          docker compose down blog || exit 1
           docker compose up -d blog || exit 1
         SCRIPT_AFTER_REQUIRED: true
