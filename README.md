@@ -21,7 +21,7 @@ This project serves a dual purpose:
 
 ## 🛠️ Built With
 
-This blog is crafted with simplicity in mind. It's powered by a 11ty, allowing for a focus on content rather than complex infrastructure. While the exact technologies might evolve, the core principle remains the same: a clean and accessible platform for sharing thoughts.
+This blog is crafted with simplicity in mind. It's powered by 11ty, allowing for a focus on content rather than complex infrastructure. While the exact technologies might evolve, the core principle remains the same: a clean and accessible platform for sharing thoughts.
 
 Built with [11ty](https://www.11ty.dev/) and hosted on [Netlify](https://www.netlify.com/)
 

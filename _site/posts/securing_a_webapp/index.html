@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/output.css">
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/lightfair.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/plantuml.min.js"></script>
+    <title>Securing a web app</title>
+  </head>
+  <body>
+  <div class="min-h-screen bg-white">
+    <div class="p-8">
+      <h1 class="text-2xl p-0">The Learning Corner</h1>
+    </div>
+    <hr class="text-stone-200">
+    
+<div class="max-w-[800px] px-5 sm:px-8 py-4">
+  <h1 class="text-2xl font-bold pb-4">Securing a web app</h1>
+  
+    <div class="text-sm pb-4">March 23, 2025</div>
+  
+  <div class="markdown">
+  <p>Let's see how a user could potentially mess around with
+my web app. We'll explore different attack vectors and
+see how we could mitigate them.</p>
+
+<div class="plantuml-container" id="plantuml-1744835487001-864">
+  <div class="tabs">
+    <button class="tab-button active" data-tab="image-plantuml-1744835487001-864">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744835487001-864">Code</button>
+  </div>
+  <div class="tab-content" data-tab-content="image-plantuml-1744835487001-864">
+    <img src="/posts/securing_a_webapp_001.png" alt="PlantUML Diagram">
+  </div>
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744835487001-864">
+    <pre><code>@startuml
+
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+Person(bad_actor, "Jimmy", "Bad actor", $sprite="osa_user_black_hat")
+
+System_Boundary(boundary, "Teachly System", $link="https://github.com/davidcode2/teachme") {
+    Container(webapi, "Web API")
+}
+
+bad_actor -&gt; webapi : access stuff without permission
+bad_actor -&gt; webapi : inject malicious stuff
+bad_actor -&gt; webapi : spam the endpoints
+bad_actor -&gt; webapi : write tons of stuff to my database
+
+@enduml
+</code></pre>
+  </div>
+</div>
+<script>
+  (function() {
+    const container = document.getElementById('plantuml-1744835487001-864');
+    const buttons = container.querySelectorAll('.tab-button');
+    const contents = container.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.add('hidden'));
+        button.classList.add('active');
+        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
+      });
+    });
+  })();
+</script>
+
+<h2>Endpoint spamming</h2>
+<p>First we'll look at the issue of &quot;Endpoint spamming&quot;. This is when an attacker
+tries to overload the server with requests. The server will try to serve all
+those requests and will at some point fail to serve requests of other users
+because it runs out of compute resources. This is known as a &quot;Denial of
+Service&quot; or DoS attack. Fortunately it is easy to mitigate using nginx rate
+limits. For this we define a rate limit in our nginx configuration. This will
+check for requests coming from the same IP address and define a time window
+within which a number of requests per second to one IP address will be served.
+This looks as follows:</p>
+<pre><code class="hljs"><span class="hljs-attribute">limit_req_zone</span> <span class="hljs-variable">$binary_remote_addr</span> zone=mylimit:<span class="hljs-number">5m</span> rate=10r/s;
+</code></pre>
+<p>The above will throttle requests from an IP if it makes more than 10 requests
+per second. Note that the limit is applied on millisecond level: the example
+will allow exactly one request per 100ms. A shared memory zone is defined which
+has a capacity of 5 megabytes. This storage is used to keep track of the IP
+addresses of incoming requests. The <code>binary_remote_addr</code> says that the IP
+addresses will be stored in binary format. This saves disk space and allows for
+more IP addresses to be tracked.</p>
+<p>So what happens if a client sends tow requests in 100ms? If the
+<code>limit_req_zone</code> directive is used as it is, the request exceeding the quota
+will be rejected. The server will return a 503 Error (Service Temporarily
+Unavailable). This can be a problem. When loading a page, there might be many
+calls to the server in quick succession to load pages, scripts, images, and
+make API calls etc. So how can we solve this? Here the <code>burst</code> parameter comes
+into play.</p>
+<p>It's important to understand that the above directive only creates a shared
+memory zone. It does not enforce the rate limit. To apply the rate limit we
+need another directive on the server or location level:<code>limit_req</code>.</p>
+<p>This is used as follows.</p>
+<pre><code class="hljs"><span class="hljs-section">location</span> / {
+  <span class="hljs-attribute">limit_req</span> zone=mylimit burst=<span class="hljs-number">5</span> nodelay;
+  <span class="hljs-attribute">proxy_pass</span> http://frontend:80;
+}
+</code></pre>
+<p>We can see here that the <code>limit_req</code> directive takes parameters. The first one
+we pass here is <code>burst</code>. This allows excess requests to burst through. If we
+get 6 requests from a client, the first one will be served immediately and the
+other five are being queued. One request from the queue is processed every 100ms.
+This can introduce lag. That's why we also have the <code>nodelay</code> argument. This ensures
+that the queue gets worked through immediately.
+Further info can be found here: <a href="https://blog.nginx.org/blog/rate-limiting-nginx">https://blog.nginx.org/blog/rate-limiting-nginx</a></p>
+<p>This should solve the issue of DoS attacks. But what about DDoS? Distributed
+Denial of Service is the term for DoS attacks that are orchestrated by multiple
+clients, thus rendering the IP based rate limiting useless. I'll have to look
+into how this can be mitigated. I assume one would have to check for unusual
+traffic spikes and try to block clients with abnormal request patterns.</p>
+<h2>Preventing unauthorized access</h2>
+<p>To prevent unauthorized access, I rely on authentication and authorization with
+an Identity Provider (IdP). I use Keycloak as my IdP. There are public
+endpoints on my site which can be accessed by anyone. Endpoints which are only
+meant for access by authorized users are private. In order to access a private
+endpoint a user first needs to authenticate with the IdP. Authentication means
+that the user needs to prove that he is the person he claims to be. When a user
+wants to authenticate he gets redirected to Keycloak and is prompted for his
+credentials. If the credentials are valid, Keycloak redirects the user back to
+the web application with an id token. This id token is then sent by the
+frontend back to Keycloak. Keycloak checks the token and if valid, issues an
+authentication token. When making requests to the backend, the client will include the
+token. The backend will check the token before handling the request. It sends
+the token to Keycloak for verification. If the token comes back as valid, the
+backend will process the request.</p>
+<h2>Checking for malicious injections</h2>
+<p>A bad actor could pass stuff to my endpoints which would execute malicious code
+on my server. To prevent this, I need to check the requests, validate inputs
+and sanitize them.</p>
+<h2>Protecting users from malicious output</h2>
+<p>Users of my application could be exposed to malicious code if I do not encode
+output that I display in the frontend. For example, I might have a field where
+I allow users to change their username. A bad actor could inject a HTML <code>&lt;script&gt;</code> tag with
+javascript. Another user would then access the page and the
+code would execute. What harm could be done there? The code could:</p>
+<ul>
+<li>download malicious software to the clients computer.</li>
+<li>log user input on the page, leading to the theft of credentials and other sensitive data, like financial data.</li>
+<li>steal sessions cookies</li>
+<li>modify the pages content</li>
+<li>initiate actions on behalf of the user - like making purchases</li>
+</ul>
+<p>Attacks like this are called Cross Site Scripting Attacks (XSS). Fortunately
+when using React, JSX already performs output encoding by default. That means
+when I show content that is user provided, it automatically is escaped. Thus
+injected scripts are stopped from running.</p>
+
+  </div>
+</div>
+
+  </div>
+  </body>
+</html>

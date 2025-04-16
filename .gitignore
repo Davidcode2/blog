@@ -1,8 +1,8 @@
 node_modules/
-_site
-_site/posts
-_site/index.html 
-_site/css
+# _site
+# _site/posts
+# _site/index.html 
+# _site/css
 
 .cache
 

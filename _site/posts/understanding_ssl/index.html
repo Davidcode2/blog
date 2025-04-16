@@ -1,0 +1,160 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/output.css">
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/lightfair.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/plantuml.min.js"></script>
+    <title>Understanding SSL</title>
+  </head>
+  <body>
+  <div class="min-h-screen bg-white">
+    <div class="p-8">
+      <h1 class="text-2xl p-0">The Learning Corner</h1>
+    </div>
+    <hr class="text-stone-200">
+    
+<div class="max-w-[800px] px-5 sm:px-8 py-4">
+  <h1 class="text-2xl font-bold pb-4">Understanding SSL</h1>
+  
+    <div class="text-sm pb-4">March 12, 2025</div>
+  
+  <div class="markdown">
+  <p>After learning about the SSL handshake in <a href="/posts/playing_around_with_architecture_diagrams/">Playing around with
+UML</a> I now want to answer a
+few more questions to fill in the picture.</p>
+<p>When a request is made from a client to a server, the client specifies which protocol
+it wants to use. In the case of http, the client might specify that it wants to establish
+an encrypted connection by using https.</p>
+<p>When a https request is sent out, a handshake is carried out between the client
+and the server. In essence, the client tells the server it would like to use an
+encrypted connection. The server then offers its certificate. The client uses
+the public key contained within the certificate to encrypt a pre-master key and
+sends it to the server. The server can decrypt it and now both parties can use
+this key (with some modifications - turning the pre-master key into a master
+key) to encrypt their messages. Since both the client (it created it) and the
+server (it has the private key to decrypt it) have the master key, they can
+read each others messages. And the messages are encrypted while in transit. So
+that's the part of the actual communication at a high level.</p>
+<p>Now what about the certificates that lay on the server? These are a mystery to me. There
+are two of them. One of them may be called <code>fullchain</code> and the other <code>privkey</code>.
+So thinking about this and recollecting what I have read, these should serve the following purposes:</p>
+<ul>
+<li><code>fullchain</code> holds information which enables the client to verify the chain of
+trust (whatever that means)</li>
+<li><code>privkey</code> will be the certificate which contains the private key. Then this
+would mean that this certificate will never leave the browser. If that is
+true, the <code>fullchain</code> certificate will also contain the public key. Since in
+my configuration there is no other certificate.</li>
+</ul>
+<p>Let's check what we got so far. Gemini and a quick verification web search
+tell me that the above reasoning is correct. The <code>fullchain</code> certificate
+contains the public key, some info about the certificate like who it was issued
+to, by whom (Certificate Authority) and when it will expire. Beyond that it contains
+the intermediate CA or CAs which enable the client to trace the chain of trust
+back to the Root CA.</p>
+<p>Now what are those Certificate Authorities? It starts with the Root CAs. These
+are a few trusted authorities. There is a list of those installed in a browser.
+So when the browser receives a certificate, it will check the intermediate
+authorities and trace them back to a root authority. If the root authority is
+trusted (i.e. is stored in the browsers list) all is fine.</p>
+<p>Here's how this hierarchy might look like:</p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=webp&via=transform 1223w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=jpeg&via=transform" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
+<p>But how can this be checked? There would need to be some way for the browser to
+verify that the root authority is legit and that it trusts the intermediate
+authorities.</p>
+<p>To do this the browser must check the digital signature of each certificate in
+the chain. When a CA issues a certificate it calculates the hash over the certificates
+content. It then encrypts the hash using the CAs private key. This encrypted hash
+is attached to the issued certificate.</p>
+<p>The client will upon receiving a certificate calculate the hash of it. It will
+then decrypt the signature using the CAs public key. If the decrypted signature
+matches the calculated hash, the CAs certificate is trusted.</p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=webp&via=transform 643w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=jpeg&via=transform" alt="Walking the chain of trust" width="643" height="48"></picture></p>
+<p>The following diagram is a first attempt at working with icon libs in PlantUML.
+This is an attempt to better understand how the chain of trust is verified.
+I'll need to come back to this as I haven't had the opportunity to fact check
+it and deepen my understanding. I'd also like to add a sequence diagram which
+digs into more detail on how the certificates / signatures of each CA get
+checked.</p>
+
+<div class="plantuml-container" id="plantuml-1744835486758-149">
+  <div class="tabs">
+    <button class="tab-button active" data-tab="image-plantuml-1744835486758-149">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744835486758-149">Code</button>
+  </div>
+  <div class="tab-content" data-tab-content="image-plantuml-1744835486758-149">
+    <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
+  </div>
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744835486758-149">
+    <pre><code>@startuml
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+' Devices
+osa_laptop(client, "Client", "Firefox", "Browser")
+note left
+
+The client receives the servers certificate
+calculates the hash of the certificate
+receives the fingerprint (encrypted hash) of certificate
+decrypts using public key
+checks if hashes match
+reads certificate chain
+checks next certificate by following steps above
+end note
+osa_server(server, "Server", "nginx", "Web server")
+
+together {
+osa_server(intermediate_ca, "Intermediate CA", "Certificate Authority", "Certificate Authority")
+osa_server(root_ca, "Root CA", "Certificate Authority", "Certificate Authority")
+}
+' Certificates
+osa_contract(server_certificate, "Server Fullchain Certificate", "Certificate","Certificate")
+together {
+osa_contract(intermediate_ca_certificate, "Intermediate CA Certificate", "Certificate","Certificate")
+osa_contract(root_ca_certificate, "Root CA Certificate", "Certificate","Certificate")
+}
+client --&gt; server : 1. request
+server --&gt; server_certificate : provide
+server_certificate --&gt; client
+client -&gt; intermediate_ca : 2. request
+intermediate_ca --&gt; intermediate_ca_certificate : provide
+client -&gt; root_ca : 3. request
+root_ca --&gt; root_ca_certificate : provide
+@enduml</code></pre>
+  </div>
+</div>
+<script>
+  (function() {
+    const container = document.getElementById('plantuml-1744835486758-149');
+    const buttons = container.querySelectorAll('.tab-button');
+    const contents = container.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.add('hidden'));
+        button.classList.add('active');
+        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
+      });
+    });
+  })();
+</script>
+
+
+  </div>
+</div>
+
+  </div>
+  </body>
+</html>
