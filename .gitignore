@@ -3,12 +3,12 @@ node_modules/
 # _site/posts
 # _site/index.html 
 # _site/css
+#_00*.png
 
 .cache
 
 *.cmapx
 *_filelist
-*_00*.png
 
 .github_app_client_secret.txt
 
