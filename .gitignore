@@ -9,3 +9,6 @@ _site/css
 *_00*.png
 
 .github_app_client_secret.txt
+
+# Local Netlify folder
+.netlify
