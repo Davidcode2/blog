@@ -4,6 +4,8 @@ _site/posts
 _site/index.html 
 _site/css
 
+.cache
+
 *.cmapx
 *_filelist
 *_00*.png
