@@ -7,3 +7,5 @@ _site/css
 *.cmapx
 *_filelist
 *_00*.png
+
+.github_app_client_secret.txt
