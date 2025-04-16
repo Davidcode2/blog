@@ -63,7 +63,7 @@ So when the browser receives a certificate, it will check the intermediate
 authorities and trace them back to a root authority. If the root authority is
 trusted (i.e. is stored in the browsers list) all is fine.</p>
 <p>Here's how this hierarchy might look like:</p>
-<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=webp&via=transform 1223w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=jpeg&via=transform" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
+<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/OEgpARfnM4-1223.webp 1223w"><img src="/posts/understanding_ssl/OEgpARfnM4-1223.jpeg" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
 <p>But how can this be checked? There would need to be some way for the browser to
 verify that the root authority is legit and that it trusts the intermediate
 authorities.</p>
@@ -74,7 +74,7 @@ is attached to the issued certificate.</p>
 <p>The client will upon receiving a certificate calculate the hash of it. It will
 then decrypt the signature using the CAs public key. If the decrypted signature
 matches the calculated hash, the CAs certificate is trusted.</p>
-<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=webp&via=transform 643w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=jpeg&via=transform" alt="Walking the chain of trust" width="643" height="48"></picture></p>
+<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/PmCHvxCOEm-643.webp 643w"><img src="/posts/understanding_ssl/PmCHvxCOEm-643.jpeg" alt="Walking the chain of trust" width="643" height="48"></picture></p>
 <p>The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.
 I'll need to come back to this as I haven't had the opportunity to fact check
@@ -82,15 +82,15 @@ it and deepen my understanding. I'd also like to add a sequence diagram which
 digs into more detail on how the certificates / signatures of each CA get
 checked.</p>
 
-<div class="plantuml-container" id="plantuml-1744838503687-537">
+<div class="plantuml-container" id="plantuml-1744841582010-24">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744838503687-537">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744838503687-537">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744841582010-24">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744841582010-24">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744838503687-537">
+  <div class="tab-content" data-tab-content="image-plantuml-1744841582010-24">
     <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744838503687-537">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744841582010-24">
     <pre><code>@startuml
 !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
 !include osaPuml/Common.puml
@@ -135,7 +135,7 @@ root_ca --&gt; root_ca_certificate : provide
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744838503687-537');
+    const container = document.getElementById('plantuml-1744841582010-24');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
