@@ -20,6 +20,11 @@ ask Gemini or some other GenAI to flesh these out.
 
 **The garden**
 
+We cannot directly access our thougts. We might be able to reconstruct what 
+is happening in our heads at some level, but we can never directly "watch" ourselves think.
+Our thinking is based on schemas. We categorize our experiences and make inferences. None 
+of our experiences are "direct", they are all constructed.
+
 - Fundamental attribution error (FAE).
 - Framing
 - Being swayed by other people
