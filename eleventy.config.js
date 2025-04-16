@@ -6,6 +6,13 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css/output.css");
+  eleventyConfig.addPassthroughCopy("**/*.png", {
+    filter: (file) => {
+      if (file) {
+        return !file.inputPath.includes("_0");
+      }
+    }
+  });
 
   eleventyConfig.addFilter("formatDate", function (dateString, format) {
     const dateObj = DateTime.fromJSDate(new Date(dateString));
