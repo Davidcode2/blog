@@ -50,5 +50,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin);
 
-  eleventyConfig.addPlugin(plantUmlPlugin);
+  if (process.env.ELEVENTY_RUN_MODE === "build") {
+    eleventyConfig.addPlugin(plantUmlPlugin);
+  }
 }
