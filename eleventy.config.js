@@ -50,5 +50,5 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin);
 
-  eleventyConfig.addPlugin(plantUmlPlugin);
+  //  eleventyConfig.addPlugin(plantUmlPlugin);
 }

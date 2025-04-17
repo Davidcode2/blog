@@ -13,12 +13,21 @@
   </head>
   <body>
   <div class="min-h-screen bg-white">
-    <div class="p-8">
-      <h1 class="text-2xl p-0">The Learning Corner</h1>
+    <div class="p-8 flex gap-4">
+      <div class="self-center bg-radial-[at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+      </div>
+      <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
     </div>
-    <hr class="text-stone-200">
-    
-<div class="max-w-[800px] px-5 sm:px-8 py-4">
+    <div class="flex flex-col xl:flex-row m-6 sm:m-8 gap-10">
+      <div class="flex flex-col gap-4 p-5 pb-2 h-fit w-72 border rounded-lg border-pink-600 shadow-sm">
+      <h2 class="font-bold">Hi, I'm Jakob 👋 <br>Welcome to my humble corner of the internet!</h2>
+        <p>
+          This is a brain dump and there's 100% chance of errors. Enjoy at your own
+          peril.
+        </p>
+      </div>
+      
+<div class="max-w-[800px]">
   <h1 class="text-2xl font-bold pb-4">Understanding SSL</h1>
   
     <div class="text-sm pb-4">March 12, 2025</div>
@@ -63,7 +72,7 @@ So when the browser receives a certificate, it will check the intermediate
 authorities and trace them back to a root authority. If the root authority is
 trusted (i.e. is stored in the browsers list) all is fine.</p>
 <p>Here's how this hierarchy might look like:</p>
-<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/OEgpARfnM4-1223.webp 1223w"><img src="/posts/understanding_ssl/OEgpARfnM4-1223.jpeg" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=webp&via=transform 1223w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=jpeg&via=transform" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
 <p>But how can this be checked? There would need to be some way for the browser to
 verify that the root authority is legit and that it trusts the intermediate
 authorities.</p>
@@ -74,87 +83,58 @@ is attached to the issued certificate.</p>
 <p>The client will upon receiving a certificate calculate the hash of it. It will
 then decrypt the signature using the CAs public key. If the decrypted signature
 matches the calculated hash, the CAs certificate is trusted.</p>
-<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/PmCHvxCOEm-643.webp 643w"><img src="/posts/understanding_ssl/PmCHvxCOEm-643.jpeg" alt="Walking the chain of trust" width="643" height="48"></picture></p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=webp&via=transform 643w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=jpeg&via=transform" alt="Walking the chain of trust" width="643" height="48"></picture></p>
 <p>The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.
 I'll need to come back to this as I haven't had the opportunity to fact check
 it and deepen my understanding. I'd also like to add a sequence diagram which
 digs into more detail on how the certificates / signatures of each CA get
 checked.</p>
-
-<div class="plantuml-container" id="plantuml-1744903304765-543">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744903304765-543">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744903304765-543">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744903304765-543">
-    <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744903304765-543">
-    <pre><code>@startuml
-!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+<p>@startuml</p>
+<p>!define osaPuml <a href="https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master">https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master</a>
 !include osaPuml/Common.puml
 !include osaPuml/User/all.puml
 !include osaPuml/Hardware/all.puml
 !include osaPuml/Misc/all.puml
 !include osaPuml/Server/all.puml
-!include osaPuml/Site/all.puml
-' Devices
-osa_laptop(client, "Client", "Firefox", "Browser")
-note left
-
-The client receives the servers certificate
-calculates the hash of the certificate
-receives the fingerprint (encrypted hash) of certificate
-decrypts using public key
-checks if hashes match
-reads certificate chain
-checks next certificate by following steps above
+!include osaPuml/Site/all.puml</p>
+<p>' Devices
+osa_laptop(client, &quot;Client&quot;, &quot;Firefox&quot;, &quot;Browser&quot;)
+note left</p>
+<ul>
+<li>The client receives the servers certificate</li>
+<li>calculates the hash of the certificate</li>
+<li>receives the fingerprint (encrypted hash) of certificate</li>
+<li>decrypts using public key</li>
+<li>checks if hashes match</li>
+<li>reads certificate chain</li>
+<li>checks next certificate by following steps above
 end note
-osa_server(server, "Server", "nginx", "Web server")
-
-together {
-osa_server(intermediate_ca, "Intermediate CA", "Certificate Authority", "Certificate Authority")
-osa_server(root_ca, "Root CA", "Certificate Authority", "Certificate Authority")
-}
-' Certificates
-osa_contract(server_certificate, "Server Fullchain Certificate", "Certificate","Certificate")
-together {
-osa_contract(intermediate_ca_certificate, "Intermediate CA Certificate", "Certificate","Certificate")
-osa_contract(root_ca_certificate, "Root CA Certificate", "Certificate","Certificate")
-}
-client --&gt; server : 1. request
+osa_server(server, &quot;Server&quot;, &quot;nginx&quot;, &quot;Web server&quot;)</li>
+</ul>
+<p>together {
+osa_server(intermediate_ca, &quot;Intermediate CA&quot;, &quot;Certificate Authority&quot;, &quot;Certificate Authority&quot;)
+osa_server(root_ca, &quot;Root CA&quot;, &quot;Certificate Authority&quot;, &quot;Certificate Authority&quot;)
+}</p>
+<p>' Certificates
+osa_contract(server_certificate, &quot;Server Fullchain Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)</p>
+<p>together {
+osa_contract(intermediate_ca_certificate, &quot;Intermediate CA Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)
+osa_contract(root_ca_certificate, &quot;Root CA Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)
+}</p>
+<p>client --&gt; server : 1. request
 server --&gt; server_certificate : provide
-server_certificate --&gt; client
-client -&gt; intermediate_ca : 2. request
+server_certificate --&gt; client</p>
+<p>client -&gt; intermediate_ca : 2. request
 intermediate_ca --&gt; intermediate_ca_certificate : provide
 client -&gt; root_ca : 3. request
-root_ca --&gt; root_ca_certificate : provide
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1744903304765-543');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+root_ca --&gt; root_ca_certificate : provide</p>
+<p>@enduml</p>
 
   </div>
 </div>
 
+    </div>
   </div>
   </body>
 </html>
