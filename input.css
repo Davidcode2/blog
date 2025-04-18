@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  @apply bg-gray-900 text-gray-200;
+}
+
 p {
   @apply mb-4; /* Adjust the value as needed */
 }
@@ -150,7 +156,7 @@ p {
 
 @utility bg-text-gradient-animation {
   animation: linear-gradient-move 5s ease infinite;
-	background: linear-gradient(45deg, oklch(52.7% 0.265 303.9), oklch(70.5% 0.213 47.604), oklch(65.6% 0.241 354.308));
+	background: linear-gradient(45deg, oklch(62.7% 0.265 303.9), oklch(70.5% 0.213 47.604), oklch(65.6% 0.241 354.308));
   background-clip: text;
 }
 

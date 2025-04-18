@@ -15,19 +15,71 @@ title: The Learning Corner
     <link rel="icon" href="/assets/favicon/favicon.ico" sizes="32x32">
     <link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png"><!-- 180×180 -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      function handleThemeChange() {
+        document.documentElement.classList.toggle(
+          "dark",
+          localStorage.theme === "dark" ||
+            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+      }
+
+      handleThemeChange();
+
+      function toggleLightTheme() {
+        if (localStorage.theme === "light") {
+          return;
+        } else {
+          localStorage.theme = "light";
+          handleThemeChange();
+        }
+      }
+
+      function toggleDarkTheme() {
+        if (localStorage.theme === "dark") {
+          return;
+        } else {
+          localStorage.theme = "dark";
+          handleThemeChange();
+        }
+      }
+
+      function toggleSystemTheme() {
+        localStorage.removeItem("theme");
+        handleThemeChange();
+      }
+
+    </script>
     <title>{{ title }}</title>
   </head>
   <body>
-  <div class="min-h-screen bg-white">
-    <a href="/">
-      <div class="px-4 sm:px-8 py-8 flex gap-4 group">
-        <div class="group-hover:bg-radial-gradient-animation self-center bg-radial-[circle_at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+  <div class="min-h-screen px-4 sm:px-8">
+    <div class="sm:flex items-center">
+      <a href="/">
+        <div class="py-8 flex gap-4 group">
+          <div class="group-hover:bg-radial-gradient-animation self-center bg-radial-[circle_at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+          </div>
+          <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
         </div>
-        <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
+      </a>
+      <div class="flex gap-2 ml-auto py-2 sm:py-0">
+        <div onclick="toggleDarkTheme()">
+          <box-icon type='solid' name='moon' color="white" class="hidden dark:block"></box-icon>
+          <box-icon type='solid' name='moon' color="black" class="block dark:hidden"></box-icon>
+        </div>
+        <div onclick="toggleLightTheme()">
+          <box-icon type='solid' name='sun' color="white" class="hidden dark:block"></box-icon>
+          <box-icon type='solid' name='sun' color="black" class="block dark:hidden"></box-icon>
+        </div>
+        <div onclick="toggleSystemTheme()">
+          <box-icon name='desktop' color="white" class="hidden dark:block"></box-icon>
+          <box-icon name='desktop' color="black" class="block dark:hidden"></box-icon>
+        </div>
       </div>
-    </a>
-    <div class="flex flex-col xl:flex-row mx-4 sm:mx-8 mt-2 gap-x-10 gap-y-4">
+    </div>
+    <div class="flex flex-col xl:flex-row mt-2 gap-x-10 gap-y-4">
       {{ content | safe }}
     </div>
   </div>
