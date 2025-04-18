@@ -6,6 +6,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css/output.css");
+  eleventyConfig.addPassthroughCopy("assets/favicon.png");
   eleventyConfig.addPassthroughCopy("posts/*.png", {
     filter: (file) => {
       if (file) {
