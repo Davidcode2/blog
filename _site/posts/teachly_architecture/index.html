@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/css/output.css">
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/lightfair.min.css">
+    <link rel="icon" href="./assets/favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/plantuml.min.js"></script>
     <title>Teachly app architecture</title>
   </head>
   <body>
@@ -33,15 +33,15 @@ project. I'll use the C4 diagrams to get an understanding of how everything fits
 together.</p>
 <p><strong>Context</strong></p>
 
-<div class="plantuml-container" id="plantuml-1744986588771-333">
+<div class="plantuml-container" id="plantuml-1744988441251-36">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744986588771-333">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744986588771-333">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744988441251-36">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744988441251-36">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744986588771-333">
+  <div class="tab-content" data-tab-content="image-plantuml-1744988441251-36">
     <img src="/posts/teachly_architecture/teachly_architecture_001.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986588771-333">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744988441251-36">
     <pre><code>@startuml
 
 !include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
@@ -61,7 +61,7 @@ systemAlias -&gt; paymentProvider : delegate payment handling
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744986588771-333');
+    const container = document.getElementById('plantuml-1744988441251-36');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -79,15 +79,15 @@ systemAlias -&gt; paymentProvider : delegate payment handling
 
 <p><strong>Containers</strong></p>
 
-<div class="plantuml-container" id="plantuml-1744986590478-952">
+<div class="plantuml-container" id="plantuml-1744988442833-815">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744986590478-952">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744986590478-952">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744988442833-815">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744988442833-815">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744986590478-952">
+  <div class="tab-content" data-tab-content="image-plantuml-1744988442833-815">
     <img src="/posts/teachly_architecture/teachly_architecture_002.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986590478-952">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744988442833-815">
     <pre><code>@startuml
 
 !include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
@@ -124,7 +124,7 @@ webapi --&gt; file_store : store + retrieve
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744986590478-952');
+    const container = document.getElementById('plantuml-1744988442833-815');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -146,15 +146,15 @@ Each container runs in a docker container behind its own nginx server.</p>
 <p>The component diagram looks like a mess. I wonder whether a messy architecture
 diagram equals a messy architecture or if this could be okay as it is.</p>
 
-<div class="plantuml-container" id="plantuml-1744986591963-758">
+<div class="plantuml-container" id="plantuml-1744988444612-16">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744986591963-758">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744986591963-758">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744988444612-16">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744988444612-16">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744986591963-758">
+  <div class="tab-content" data-tab-content="image-plantuml-1744988444612-16">
     <img src="/posts/teachly_architecture/teachly_architecture_003.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986591963-758">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744988444612-16">
     <pre><code>@startuml
 
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
@@ -222,7 +222,7 @@ authController --&gt; authService
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744986591963-758');
+    const container = document.getElementById('plantuml-1744988444612-16');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
