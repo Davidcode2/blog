@@ -13,19 +13,14 @@
   </head>
   <body>
   <div class="min-h-screen bg-white">
-    <div class="p-8 flex gap-4">
-      <div class="self-center bg-radial-[at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+    <a href="/">
+      <div class="px-4 sm:px-8 py-8 flex gap-4 group">
+        <div class="group-hover:bg-radial-gradient-animation self-center bg-radial-[circle_at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+        </div>
+        <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
       </div>
-      <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
-    </div>
-    <div class="flex flex-col xl:flex-row m-6 sm:m-8 gap-10">
-      <div class="flex flex-col gap-4 p-5 pb-2 h-fit w-72 border rounded-lg border-pink-600 shadow-sm">
-      <h2 class="font-bold">Hi, I'm Jakob 👋 <br>Welcome to my humble corner of the internet!</h2>
-        <p>
-          This is a brain dump and there's 100% chance of errors. Enjoy at your own
-          peril.
-        </p>
-      </div>
+    </a>
+    <div class="flex flex-col xl:flex-row mx-4 sm:mx-8 mt-2 gap-x-10 gap-y-4">
       
 <div class="max-w-[800px]">
   <h1 class="text-2xl font-bold pb-4">Playing with PlantUML</h1>
@@ -38,15 +33,15 @@ networks, TLS, Client Server communication, server to server communication..
 Playing around with PlantUML might help with that. It also has the nice side effect
 of giving me some practice with PlantUML.</p>
 
-<div class="plantuml-container" id="plantuml-1744930272016-203">
+<div class="plantuml-container" id="plantuml-1744986587842-192">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744930272016-203">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744930272016-203">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744986587842-192">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744986587842-192">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744930272016-203">
+  <div class="tab-content" data-tab-content="image-plantuml-1744986587842-192">
     <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_001.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744930272016-203">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986587842-192">
     <pre><code>@startuml
 skinparam componentStyle rectangle
 rectangle Server {
@@ -72,7 +67,7 @@ end note
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744930272016-203');
+    const container = document.getElementById('plantuml-1744986587842-192');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -114,15 +109,15 @@ secret to derive a master secret. For this, previously exchanged random numbers
 are used.</p>
 <p>The below diagram will have to be updated with this new found understanding.</p>
 
-<div class="plantuml-container" id="plantuml-1744930273149-714">
+<div class="plantuml-container" id="plantuml-1744986589107-547">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744930273149-714">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744930273149-714">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744986589107-547">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744986589107-547">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744930273149-714">
+  <div class="tab-content" data-tab-content="image-plantuml-1744986589107-547">
     <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_002.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744930273149-714">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986589107-547">
     <pre><code>@startuml
 !pragma teoz true
 skinparam BoxPadding 5
@@ -155,7 +150,7 @@ end box
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744930273149-714');
+    const container = document.getElementById('plantuml-1744986589107-547');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -180,15 +175,15 @@ section where the viewer can toggle between the code and the image. And because
 I am lazy and I have other things to do, I'll let Gemini do that for me.</p>
 <p>Let's see how it does:</p>
 
-<div class="plantuml-container" id="plantuml-1744930274816-570">
+<div class="plantuml-container" id="plantuml-1744986590513-317">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744930274816-570">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744930274816-570">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744986590513-317">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744986590513-317">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744930274816-570">
+  <div class="tab-content" data-tab-content="image-plantuml-1744986590513-317">
     <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_004.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744930274816-570">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986590513-317">
     <pre><code>@startuml
 
 Alice -&gt; Bob : does it work?
@@ -203,7 +198,7 @@ Bob --&gt; Charline : That's right!
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744930274816-570');
+    const container = document.getElementById('plantuml-1744986590513-317');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -221,15 +216,15 @@ Bob --&gt; Charline : That's right!
 
 <p>Let me put another UML Diagram right here:</p>
 
-<div class="plantuml-container" id="plantuml-1744930274062-156">
+<div class="plantuml-container" id="plantuml-1744986589879-175">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744930274062-156">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744930274062-156">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744986589879-175">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744986589879-175">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744930274062-156">
+  <div class="tab-content" data-tab-content="image-plantuml-1744986589879-175">
     <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_003.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744930274062-156">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986589879-175">
     <pre><code>@startuml
 [component1] --&gt; [componentX]
 [component1] --&gt; [component2]
@@ -239,7 +234,7 @@ Bob --&gt; Charline : That's right!
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744930274062-156');
+    const container = document.getElementById('plantuml-1744986589879-175');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -268,15 +263,15 @@ changed.</p>
 <p>The goal is to have only one image for each diagram in a post at any given time.</p>
 <p>Let's draw it up:</p>
 
-<div class="plantuml-container" id="plantuml-1744930275479-696">
+<div class="plantuml-container" id="plantuml-1744986591183-180">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1744930275479-696">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1744930275479-696">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1744986591183-180">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1744986591183-180">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1744930275479-696">
+  <div class="tab-content" data-tab-content="image-plantuml-1744986591183-180">
     <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_005.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1744930275479-696">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1744986591183-180">
     <pre><code>@startuml
 
 skinparam componentStyle rectangle
@@ -305,7 +300,7 @@ transform -&gt; png : creates
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1744930275479-696');
+    const container = document.getElementById('plantuml-1744986591183-180');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
