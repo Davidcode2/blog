@@ -7,53 +7,400 @@
     <link rel="stylesheet" href="/css/output.css">
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/lightfair.min.css">
-    <link rel="icon" href="./assets/favicon.png">
+    <link rel="icon" href="/assets/favicon/favicon.png">
+    <link rel="icon" href="/assets/favicon/favicon512x512.png" sizes="512x512">
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png"><!-- 180×180 -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      function handleThemeChange() {
+        document.documentElement.classList.toggle(
+          "dark",
+          localStorage.theme === "dark" ||
+            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+      }
+
+      handleThemeChange();
+
+      function toggleLightTheme() {
+        if (localStorage.theme === "light") {
+          return;
+        } else {
+          localStorage.theme = "light";
+          handleThemeChange();
+        }
+      }
+
+      function toggleDarkTheme() {
+        if (localStorage.theme === "dark") {
+          return;
+        } else {
+          localStorage.theme = "dark";
+          handleThemeChange();
+        }
+      }
+
+      function toggleSystemTheme() {
+        localStorage.removeItem("theme");
+        handleThemeChange();
+      }
+
+    </script>
     <title>The Learning Corner</title>
   </head>
   <body>
-  <div class="min-h-screen bg-white">
-    <a href="/">
-      <div class="px-4 sm:px-8 py-8 flex gap-4 group">
-        <div class="group-hover:bg-radial-gradient-animation self-center bg-radial-[circle_at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+  <div class="min-h-screen px-4 sm:px-8">
+    <div class="sm:flex items-center">
+      <a href="/">
+        <div class="py-8 flex gap-4 group">
+          <div class="group-hover:bg-radial-gradient-animation self-center bg-radial-[circle_at_50%_75%] from-purple-700 via-purple-500 to-pink-400 to-90% w-6 h-6 rounded-full">
+          </div>
+          <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
         </div>
-        <h1 class="self-center text-2xl p-0 text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-30% to-orange-500 to-90% w-fit">The Learning Corner</h1>
+      </a>
+      <div class="flex gap-2 ml-auto py-2 sm:py-0">
+        <div onclick="toggleDarkTheme()">
+          <box-icon type="solid" name="moon" color="white" class="hidden dark:block"></box-icon>
+          <box-icon type="solid" name="moon" color="black" class="block dark:hidden"></box-icon>
+        </div>
+        <div onclick="toggleLightTheme()">
+          <box-icon type="solid" name="sun" color="white" class="hidden dark:block"></box-icon>
+          <box-icon type="solid" name="sun" color="black" class="block dark:hidden"></box-icon>
+        </div>
+        <div onclick="toggleSystemTheme()">
+          <box-icon name="desktop" color="white" class="hidden dark:block"></box-icon>
+          <box-icon name="desktop" color="black" class="block dark:hidden"></box-icon>
+        </div>
+        <div class="self-center">
+          <a href="https://github.com/davidcode2">
+            <svg viewbox="0 0 100 100" class="h-5 w-5 fill-black dark:fill-white" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"></path></svg>
+          </a>
+        </div>
       </div>
-    </a>
-    <div class="flex flex-col xl:flex-row mx-4 sm:mx-8 mt-2 gap-x-10 gap-y-4">
+    </div>
+    <div class="flex flex-col xl:flex-row mt-2 gap-x-10 gap-y-4">
       
 
-<div class="flex flex-col gap-2 p-5 h-fit w-72 border rounded-lg border-pink-600 shadow-sm">
+<div class="flex flex-col gap-2 p-5 h-fit max-w-72 border rounded-lg border-pink-600 shadow-sm">
   <h2 class="font-bold">Hi, I'm Jakob 👋 <br>Welcome to my humble corner of the internet!</h2>
   <div>
     This is a brain dump and there's a 100% chance of errors. Enjoy at your own
     peril.
   </div>
-  <div class="flex justify-center">
-    <a href="https://github.com/davidcode2">
-      <picture><source type="image/webp" srcset="/bc3Z5u1fIo-98.webp 98w"><img src="/bc3Z5u1fIo-98.jpeg" alt="GitHub" class="w-6 h-6 opacity-70 hover:opacity-900 transition-opacity" width="98" height="96"></picture>
-    </a>
-  </div>
 </div>
-<ul class="[&>*]:hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
-	<li><a href="/posts/peak/">Book: Peak - secrets from the new science of expertise</a></li>
-	<li><a href="/posts/smarter_than_you_think/">Book: Smarter Than You Think</a></li>
-	<li><a href="/posts/sapiens_harari/">Book: Sapiens - a brief history of humankind</a></li>
-	<li><a href="/posts/deliberate_walks/">Deliberate Walks</a></li>
-	<li><a href="/posts/reading_list/">Reading List</a></li>
-	<li><a href="/posts/focus_minute_tracking/">Focus minute tracking</a></li>
-	<li><a href="/posts/playing_around_with_architecture_diagrams/">Playing with PlantUML</a></li>
-	<li><a href="/posts/understanding_ssl/">Understanding SSL</a></li>
-	<li><a href="/posts/mindware_nisbett/">Book: Mindware by Richard Nisbett</a></li>
-	<li><a href="/posts/improving_blogging/">Improve blogging</a></li>
-	<li><a href="/posts/teachly_architecture/">Teachly app architecture</a></li>
-	<li><a href="/posts/ultralearning/">Book: Ultralearning</a></li>
-	<li><a href="/posts/playing_around_with_data_visualization/">Playing around with data visualization</a></li>
-	<li><a href="/posts/securing_a_webapp/">Securing a web app</a></li>
-	<li><a href="/posts/psychology_of_money/">Book: The Psychology of Money</a></li>
-	<li><a href="/posts/250417-1718-trying_to_synthesize_learnings_on_life_design/">Trying to synthesize learnings on life design</a></li>
-	<li><a href="/posts/250418-0943-learning_about_writing/">Learning about writing</a></li>
-</ul>
+<div class="pb-5">
+  <ul class="">
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/peak/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            1
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: Peak - secrets from the new science of expertise
+            </div>
+            <div class="text-xs text-slate-500">
+            March 03, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/smarter_than_you_think/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            2
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: Smarter Than You Think
+            </div>
+            <div class="text-xs text-slate-500">
+            March 03, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/sapiens_harari/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            3
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: Sapiens - a brief history of humankind
+            </div>
+            <div class="text-xs text-slate-500">
+            March 07, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/deliberate_walks/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            4
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Deliberate Walks
+            </div>
+            <div class="text-xs text-slate-500">
+            March 08, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/reading_list/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            5
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Reading List
+            </div>
+            <div class="text-xs text-slate-500">
+            March 08, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/focus_minute_tracking/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            6
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Focus minute tracking
+            </div>
+            <div class="text-xs text-slate-500">
+            March 09, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/playing_around_with_architecture_diagrams/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            7
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Playing with PlantUML
+            </div>
+            <div class="text-xs text-slate-500">
+            March 09, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/understanding_ssl/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            8
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Understanding SSL
+            </div>
+            <div class="text-xs text-slate-500">
+            March 12, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/mindware_nisbett/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            9
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: Mindware by Richard Nisbett
+            </div>
+            <div class="text-xs text-slate-500">
+            March 16, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/improving_blogging/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            10
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Improve blogging
+            </div>
+            <div class="text-xs text-slate-500">
+            March 22, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/teachly_architecture/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            11
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Teachly app architecture
+            </div>
+            <div class="text-xs text-slate-500">
+            March 22, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/ultralearning/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            12
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: Ultralearning
+            </div>
+            <div class="text-xs text-slate-500">
+            March 22, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/playing_around_with_data_visualization/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            13
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Playing around with data visualization
+            </div>
+            <div class="text-xs text-slate-500">
+            March 23, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/securing_a_webapp/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            14
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Securing a web app
+            </div>
+            <div class="text-xs text-slate-500">
+            March 23, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/psychology_of_money/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            15
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Book: The Psychology of Money
+            </div>
+            <div class="text-xs text-slate-500">
+            April 07, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/250417-1718-trying_to_synthesize_learnings_on_life_design/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            16
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Trying to synthesize learnings on life design
+            </div>
+            <div class="text-xs text-slate-500">
+            April 17, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+    <li class="py-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
+      <a href="/posts/250418-0943-learning_about_writing/">
+        <div class="flex gap-2">
+          <div class="text-5xl w-14 min-w-14 font-extrabold">
+            17
+          </div>
+          <div class="flex flex-col">
+            <div>
+            Learning about writing
+            </div>
+            <div class="text-xs text-slate-500">
+            April 18, 2025
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+  </ul>
+</div>
 
     </div>
   </div>
