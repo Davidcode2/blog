@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  @apply bg-gray-900 text-gray-200;
+  @apply bg-zinc-900 text-gray-200;
 }
 
 p {
@@ -84,7 +84,7 @@ p {
 }
 
 .markdown code {
-  @apply bg-gray-100 px-1 py-0.5 rounded my-4; /* Adjust padding and border radius as needed */
+  @apply bg-gray-100 dark:bg-zinc-800 dark:text-gray-300 px-1 py-0.5 rounded my-4; /* Adjust padding and border radius as needed */
 }
 
 .markdown a {
@@ -92,11 +92,11 @@ p {
 }
 
 .plantuml-container {
-  @apply bg-gray-100 rounded flex flex-col my-4;
+  @apply bg-gray-100 dark:bg-zinc-800 rounded flex flex-col my-4;
 }
 
 .plantuml-container .tab-button.active {
-  @apply text-gray-600 font-bold;
+  @apply text-gray-600 dark:text-gray-200 font-bold;
 }
 
 .plantuml-container .tabs {
@@ -104,7 +104,7 @@ p {
 }
 
 .plantuml-container .tab-button {
-  @apply py-1 text-gray-500 cursor-pointer hover:text-gray-400;
+  @apply py-1 text-gray-500 dark:text-gray-200 cursor-pointer hover:text-gray-400;
 }
 
 .plantuml-container .tab-button:first-child {
