@@ -190,12 +190,6 @@
   }
 }
 @layer utilities {
-  .collapse {
-    visibility: collapse;
-  }
-  .relative {
-    position: relative;
-  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -232,12 +226,6 @@
   .hidden {
     display: none;
   }
-  .inline-flex {
-    display: inline-flex;
-  }
-  .list-item {
-    display: list-item;
-  }
   .table {
     display: table;
   }
@@ -262,17 +250,17 @@
   .max-w-\[800px\] {
     max-width: 800px;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .transform {
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
   }
-  .resize {
-    resize: both;
-  }
   .flex-col {
     flex-direction: column;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -305,10 +293,6 @@
   .bg-gradient-to-r {
     --tw-gradient-position: to right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
-  }
-  .bg-radial-\[at_50\%_75\%\] {
-    --tw-gradient-position: at 50% 75%;
-    background-image: radial-gradient(var(--tw-gradient-stops,at 50% 75%));
   }
   .bg-radial-\[circle_at_50\%_75\%\] {
     --tw-gradient-position: circle at 50% 75%;
@@ -371,17 +355,11 @@
   .p-5 {
     padding: calc(var(--spacing) * 5);
   }
-  .p-8 {
-    padding: calc(var(--spacing) * 8);
-  }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-  .pb-2 {
-    padding-bottom: calc(var(--spacing) * 2);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -405,11 +383,8 @@
   .text-transparent {
     color: transparent;
   }
-  .italic {
-    font-style: italic;
-  }
-  .underline {
-    text-decoration-line: underline;
+  .opacity-70 {
+    opacity: 70%;
   }
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
@@ -422,6 +397,11 @@
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
   .group-hover\:bg-radial-gradient-animation {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -431,12 +411,10 @@
       }
     }
   }
-  .group-hover\:bg-text-gradient-animation {
-    &:is(:where(.group):hover *) {
+  .hover\:opacity-900 {
+    &:hover {
       @media (hover: hover) {
-        animation: linear-gradient-move 5s ease infinite;
-        background: linear-gradient(45deg, oklch(52.7% 0.265 303.9), oklch(70.5% 0.213 47.604), oklch(65.6% 0.241 354.308));
-        background-clip: text;
+        opacity: 900%;
       }
     }
   }
