@@ -51,6 +51,9 @@ p {
   padding: 0.75rem 1rem; /* Consistent padding for cells */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light bottom border */
 }
+.dark .markdown td {
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3); /* Light bottom border */
+}
 
 .markdown th {
   background-color: rgba(0, 0, 0, 0.03); /* Subtle background for headers */
@@ -64,6 +67,10 @@ p {
 
 .markdown thead tr {
   border-bottom: 2px solid rgba(0, 0, 0, 0.15); /* Slightly thicker border for thead bottom */
+}
+
+.dark .markdown thead tr {
+  border-bottom: 2px solid rgba(100, 100, 100, 0.3); /* Light bottom border */
 }
 
 .markdown tbody tr:last-child td {
@@ -81,6 +88,10 @@ p {
 /* Optional: Striped rows for better readability */
 .markdown tbody tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.01);
+}
+
+.dark .markdown tbody tr:nth-child(even) {
+  background-color: rgba(50, 50, 50, 0.04);
 }
 
 .markdown code {
