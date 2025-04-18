@@ -5,6 +5,6 @@ layout: layout.njk
 {# List every content page in the project #}
 <ul class="[&>*]:hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 from-10% via-orange-500 via-30% to-indigo-500 to-90% w-fit">
 	{%- for post in collections.post %}
-	<li class="hover:font-extrabold "><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+	<li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
 	{%- endfor %}
 </ul>

@@ -15,3 +15,4 @@
 [Securing a web app](securing_a_webapp)
 [Improve blogging](improving_blogging)
 [Trying to synthesize learnings on life design](250417-1718-trying_to_synthesize_learnings_on_life_design)
+Learning about writing
