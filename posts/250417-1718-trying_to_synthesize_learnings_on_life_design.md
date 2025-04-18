@@ -156,27 +156,49 @@ Now I could discuss whether learning about the world is the best way to be
 loved. There are likely many other factors that play a larger role in being
 loved, so I should definitely make sure to invest time in those. In fact it is
 absolutely imperative to invest time into that. For the other topic of making
-money e.g. surviving. We are made to believe that we need to be highly skilled
+money e.g. surviving: We are made to believe that we need to be highly skilled
 in order to make a living. But I guess we would be able to get by without being
 a master in our field. I'm thinking that we gain a lot of enjoyment from being
-so good at what we do that others look to us for advice and help. So this might
+so good at what we do that others look to us for advice and help. 
+
+So this might
 have something to do with having a decent place in society. From what I read I
 learned that humans do set up hierarchies between people and it is beneficial
 to secure a decent place in those hierarchies.
 
+### Hierarchies
+
+Let's first look at the global hierarchy, our place in society as whole. I
+think here the currency is money. The chef at the restaurant neither cares nor
+knows anything about my relationships or skill. He cares about whether I pay
+the meal and nothing else. Same goes for the guy that made my bicycle. I never
+met the person and he doesn't care about my existence. Yet he spent his
+valuable time and energy to build me a bicycle. 
+
 ## Two currencies
 
-One thing that comes to mind is that we have different playing fields which we
-operate on in our lifes and we should be mindful on which playing fields we
-spend most of our energy. Now with the above established we can think about
-what this means for everyday life. I need the playing field of my job to thrive
-financially and secure a good position in the social hierarchy. Is money a good
-enough proxy for social hierarchy? Perhaps there are mutliple disjunct
-hierarchies. A global one, where money allows me to buy other peoples time and
-attention. And a local one where money is meaningless and personal connection
-is the most important currency. Now it seems obvious that while the first
-hierarchy is important to get by in life, it is much less elementary to
-happiness and a fulfilled life than the second one.
+There's different playing fields which we play on in our lifes. We should be
+mindful of which playing fields we spend most of our energy on. So what playing
+fields do I spend my time on? There's my job which I need to thrive financially
+and secure a good position in the social hierarchy. Then there's my 
+personal life with my partner and around family and friends.
+
+How can we gauge our positions in these hierarchies, or our rank in the roster 
+of the teams that play on these fields?
+
+At work I might get by with being a mediocre programmer. But it's possible that
+theres more satisfaction to be had when being good, thereby gaining respect and 
+getting the feeling of being a valued member of the team.
+
+In personal life, what counts is our relationships. The love and time we 
+give to others and the depth of our connections.
+Now it seems obvious that while the job is important to get by in life, it is
+much less elementary to happiness and a fulfilled life than the personal sphere.
+
+To summarize, theres multiple spheres that are largely disjunt. A global one,
+where money allows me to buy other peoples time and attention. And a local one
+where money is meaningless and personal connection is the most important
+currency. 
 
 Ok so let's converge again on the topic that I set out to discuss. We have so
 far discussed time, energy and the What. Now let's think about the How while
