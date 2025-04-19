@@ -10,6 +10,10 @@ p {
   @apply mb-4; /* Adjust the value as needed */
 }
 
+.markdown blockquote {
+  @apply rounded-md pl-4 border-l
+}
+
 /* headings */
 .markdown h2 {
   @apply text-xl font-bold mb-2; /* Adjust the value as needed */
