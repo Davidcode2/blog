@@ -57,7 +57,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPairedShortcode("tldr", function(content) {
     return `<div class="border-l rounded-lg my-4">
       <div class="px-2 py-1 text-sm font-bold">tldr;</div>
-      <div class="p-2 text-gray-800">${content}</div>
+      <div class="p-2 text-gray-800 dark:text-gray-300">${content}</div>
     </div>`;
   });
 }
