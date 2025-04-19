@@ -9,18 +9,18 @@ Here's what I've planned to do today: Write a blog post about what I have
 learned from the various books that I've read or reread over the past couple of
 months.
 
-## Lifs task
+## Life's task
 
 There was a lot about learning, performance, expertise and decision making.
 Also building habits and thinking. I want to explore what these learnings could
-mean to me presonally and how I could utilize them in everyday life to get
+mean to me personally and how I could utilize them in everyday life to get
 closer to my goals. It is also worth noting that happiness should play a large
 role in all of this as well. I think that when focusing too much on the
 performance aspect of it all, happiness and what is really  important in life
 falls to the wayside. This is something that Cal Newport nicely reflects in his
 book deep work. I think he says something like that working is actually more
 enjoyable then leisure time. Also he says to figure out what the most important
-things in ones life are. Robert Greene in Mastery calls this "finding the lifes
+things in ones life are. Robert Greene in Mastery calls this "finding the life's
 task".
 
 I've thought that for me that would be learning. Figuring out how to use the
@@ -35,13 +35,13 @@ be asked before minding the learning is to wonder about what one should focus
 on. And also what one can discard and ignore. This seems to be a very important
 skill today, to be able to just ignore things.
 
-The reaseon I started this journal entry was to get my head straight and get in
+The reason I started this journal entry was to get my head straight and get in
 the mood for writing the learnings from the books mentioned before. I had just
-eaten dinner and while doing that I was on the phone checking Github
+eaten dinner and while doing that I was on the phone checking GitHub
 repositories. I saw AutoGPT and going through that brought me to stagehand and
 that brought me to browserbase. These are tools for automating browsers using
 AI. With browserbase one can run 1000s of browsers and run all kinds of tasks.
-I guess one could use them for scraping, testing information gathering (thats
+I guess one could use them for scraping, testing information gathering (that's
 scraping i guess) and for automating tasks of all kinds. The tool leverages
 playwright to run tasks in the browser.
 
@@ -58,7 +58,7 @@ such skill? I guess the answer is focus and time.
 ## Building expertise over time
 
 When someone starts programming at age 10 and stays at it that person will have
-double the amonut of experience than I do if I start at twenty and our paths
+double the amount of experience than I do if I start at twenty and our paths
 cross when we are both 30. It would in fact be surprising if the person would
 not be twice as good as I am. And I guess when comparing something as closely
 defined as that, programming in a specific domain like web development, then
@@ -72,14 +72,14 @@ on the right thing.
 ## Diminishing returns
 
 Now I am wondering how much value one can get from learning to do web
-development for ten years. Theres something like diminishing returns. When I
+development for ten years. There's something like diminishing returns. When I
 get to a good enough level, say in the first two to three years I should
 probably step up the game and look for something else to learn. Web development
 is a nice skill to have but in ten years time will it really still be that
 important? I guess the question here is what to focus on when learning
 something new.
 
-I'll have to stop the computer now because its running insanly hot. It's a lot
+I'll have to stop the computer now because its running insanely hot. It's a lot
 better now so maybe it was just because i was placing the laptop on a blanket
 and too little air was getting through.
 
@@ -104,7 +104,7 @@ functioning at our best this time cannot be optimally utilized. This means
 we need to take care of sleep, exercise and nutrition as well as mental health.
 
 Let's not focus on that right now and consider it established that we have
-energy. Now to the time. In many places in todays world we have the luxury of
+energy. Now to the time. In many places in today's world we have the luxury of
 great agency over our time. We rarely truly need to work more than 40 hours a
 week to make a living. In many cases we can even work less than that. This is a
 choice we can make. This leaves us with ample time and hopefully enough energy
@@ -119,13 +119,13 @@ him closer to his goals.
 
 Now that we have thought about time and it's allocation, we can start thinking
 about what to do with it. So this is about the what. And here we can think
-about what is really important to us. This is about lifes questions, lifes task
-and the most impotant things in life. The things that are easy to agree on are
+about what is really important to us. This is about life's questions, life's task
+and the most important things in life. The things that are easy to agree on are
 health, family and human connection. Next up is purpose. This is a bit more
-tricky to think about and i guess highly indivdual. Going for myself I think
+tricky to think about and i guess highly individual. Going for myself I think
 that learning is a big part of my purpose. I gain satisfaction from reading
 about ideas, thinking about them and trying to efficiently connect them to
-things I know. This has appeal to me becasue I feel like it is such a
+things I know. This has appeal to me because I feel like it is such a
 bottomless well. It's also not expensive to do and can be done any time. I
 guess it's also easy. This will probably be a part worth thinking about. We
 tend to gravitate toward preserving energy and therefore doing easy things.
@@ -133,7 +133,7 @@ tend to gravitate toward preserving energy and therefore doing easy things.
 ## Questioning Life's Task
 
 To move on let's try to go deeper into the what. I've established that I enjoy
-learning. But maybe let's in fact take a step back and thinkg about that. Why
+learning. But maybe let's in fact take a step back and think about that. Why
 learning? What benefit does it bring me and others in the world? To go back to
 very basic things. I work my job and am therefore able to make a living. I can
 pay for food, shelter and clothing. I could also buy some other stuff but that
@@ -148,8 +148,8 @@ be respected and thought of as smart? Because I want to be liked. Why do I want
 to be liked? Because I need the support of other to survive. Why do I need the
 support of other to survive? Because I am utterly incapable of surviving on my
 own. Why is that so? Because I grew up in a world which everything is
-interconnected and splintered. Ok how many whys was that? six. It felt like a
-lot more. Very interesting excercise. Ok so let's analyze that.
+interconnected and splintered. Ok how many whys was that? Six. It felt like a
+lot more. Very interesting exercise. Ok so let's analyze that.
 
 I like learning because I want to survive. But also because I want to be loved.
 Now I could discuss whether learning about the world is the best way to be
@@ -177,7 +177,7 @@ valuable time and energy to build me a bicycle.
 
 ## Two currencies
 
-There's different playing fields which we play on in our lifes. We should be
+There's different playing fields which we play on in our life's. We should be
 mindful of which playing fields we spend most of our energy on. So what playing
 fields do I spend my time on? There's my job which I need to thrive financially
 and secure a good position in the social hierarchy. Then there's my 
@@ -187,7 +187,7 @@ How can we gauge our positions in these hierarchies, or our rank in the roster
 of the teams that play on these fields?
 
 At work I might get by with being a mediocre programmer. But it's possible that
-theres more satisfaction to be had when being good, thereby gaining respect and 
+there's more satisfaction to be had when being good, thereby gaining respect and 
 getting the feeling of being a valued member of the team.
 
 In personal life, what counts is our relationships. The love and time we 
@@ -195,7 +195,7 @@ give to others and the depth of our connections.
 Now it seems obvious that while the job is important to get by in life, it is
 much less elementary to happiness and a fulfilled life than the personal sphere.
 
-To summarize, theres multiple spheres that are largely disjunt. A global one,
+To summarize, there's multiple spheres that are largely disjoint. A global one,
 where money allows me to buy other peoples time and attention. And a local one
 where money is meaningless and personal connection is the most important
 currency. 
@@ -207,7 +207,7 @@ to be essential.
 
 ## Identity based change
 
-### Incoherent mumblings
+### Incoherent mumbling
 
 I think the How is the part that most of the books I read focus on. At the
 beginning is the goal to improve. For this section we can ignore what we'd like
@@ -233,7 +233,7 @@ around: To make it harder to do things that are not desired.
 
 ## Breaking it down to the day
 
-We are now on the micro level. And arguably, once we have indentified the big
+We are now on the micro level. And arguably, once we have identified the big
 theme this is all that matters. The actions we do in a day. Things appear to
 become laughably easy once we break it down to the atomic units of our life,
 the day. Once we know what to do, we can schedule our time to make sure we do
@@ -246,29 +246,29 @@ what we want to do.
 
 ## Categorizing tools
 
-### handing off to the subconcious
+### handing off to the subconscious
 
 I'm struggling with the categorization of these different topics. To give 
-my subconcious a shot at handlng this I will provide a rough sketch of the 
+my subconscious a shot at handling this I will provide a rough sketch of the 
 categories I think are useful for managing ones life.
 
-- the macro: what to do with our time / purpose / lifes goal
+- the macro: what to do with our time / purpose / life's goal
   - Some tools for reasoning fall into this category. 
   - Probably the five whys,
-  - mindmapping
+  - mind mapping
   - exploration tools,
   - brainstorming 
   - thinking hats, etc.
   - manifestations
-- the meso: (chatGPT came up with that) the systems we put in place to
+- the meso: (ChatGPT came up with that) the systems we put in place to
   achieve our goals
   - who we are, our identity
   - our environment
   - the people we surround ourselves with
   - our beliefs
   - peak: anything is possible
-  - parrish: camera team
-  - lifes CEOs
+  - Parrish: camera team
+  - Life's CEOs
 - the micro: the actions we take in our day to day life
   - time blocking
   - planning
@@ -276,16 +276,16 @@ categories I think are useful for managing ones life.
   - cost benefit analysis
   - opportunity costs
   - statistical thinking
-  - will this make life for my future self easier? (parrish)
-- the atomic: the specifc actions we schedule into our day
+  - will this make life for my future self easier? (Parrish)
+- the atomic: the specific actions we schedule into our day
   - our thoughts
-  - decicion making
+  - decision making
   - focus
   - deliberation
   - fallacies
   - mnemonics
   - spaced repetition
-  - ultralearning
+  - Ultralearning
   - happiness
   - expectations
 
@@ -302,7 +302,7 @@ the separation along time scales.
 
 ## Atomic actions
 
-I guess what could be helpful is to realize that absolutely everything breakes
+I guess what could be helpful is to realize that absolutely everything breaks
 down to an atomic action at the end. The thing that changes is the time horizon
 of the action. For example when deciding about whether to have kids or not that
 is an atomic action of sitting down and weighing pros and cons, applying
@@ -319,7 +319,7 @@ For the sake of simplicity let's assume that there is no difference.
 
 ## Allocating time to big picture thinking and execution
 
-So perhaps the categorization of actions by their long term signifcance is
+So perhaps the categorization of actions by their long term significance is
 valid. How does this help me in my day to day life? Let's consider our limited
 resource again: time. When everything comes down to us doing some atomic action
 we might say that once we have the general direction of our life roughly
@@ -339,16 +339,16 @@ A nice visualization here can be lent from Shane Parrish. He categorizes
 decisions along two dimensions. Their long term impact and their reversibility.
 This might be a tool which we can utilize in the big picture phase, so when
 initially setting out to determine the course to take and on those planned
-ocassions when the course is reviewed. Or of course when big decisions just
+occasions when the course is reviewed. Or of course when big decisions just
 jump up at you out of nowhere. To illustrate: we have a diagram divided into
 four squares. In the square at the bottom left we have decisions which are
 neither consequential nor hard to reverse. So deciding what to eat tonight
 might fall into this category. Above, in the top left quadrant we have
-decisions which are hard to reverse but inconsequential. Maybe thats getting a
-tattoo on your butt cheek. On the bottom right theres the quadrant with
+decisions which are hard to reverse but inconsequential. Maybe that's getting a
+tattoo on your butt cheek. On the bottom right there's the quadrant with
 decisions that are easy to reverse but consequential. Maybe that's committing
 to a savings plan. You can always just stop saving but committing might make
-the difference between being ok or rich at retirement time. Then the quadrant
+the difference between being Ok or rich at retirement time. Then the quadrant
 at top right. Here's the things like taking a new job in a different place,
 buying a house, getting married, and at the very top right there's having kids.
 
@@ -362,17 +362,17 @@ can think about how to best execute our atomic actions to get to our goals.
 
 One thing to note is, that doing what needs to be done to get where we want to
 be might not be fun. There might be a million other things that we could busy
-our minds with, like watching TV. This is a good segway into the topic of
+our minds with, like watching TV. This is a good segue into the topic of
 motivation. My understanding is that motivation is more or less useless.
 Something along the lines of motivation is willpower. Willpower is an
-exhaustable resource. If we have to expend energy to convice ourselves to do
+exhaustible resource. If we have to expend energy to convince ourselves to do
 something each time we do it we aren't going to last long. 
 
 That's why we need systems that make us do what we need to do automatically and
-stop us from doing what we shoudn't be doing. A prerequisite here is that we
+stop us from doing what we shouldn't be doing. A prerequisite here is that we
 know what each is, but let's assume that's been figured out. 
 
-## Stopping undesired behaviour
+## Stopping undesired behavior
 
 We'll start with preventing us doing stuff we shouldn't do. I feel like that's
 easier. Say we want to stop eating chocolate. Rather then resisting going to
@@ -380,8 +380,8 @@ the drawer and getting us a sweet, we can sidestep the willpower issue by
 simply not buying sweets at the supermarket. Not buying the stuff when we're at
 the supermarket costs us a fraction of the willpower than constantly resisting
 the chocolate that's right next to us in the drawer.
-We're making it harder for us to perform the undesired behaviour.
-Another tool is to change your words. I think this is extermely powerful and 
+We're making it harder for us to perform the undesired behavior.
+Another tool is to change your words. I think this is extremely powerful and 
 simple. Instead of saying "I'm not eating chocolate this month", you could say 
 "I'm don't like sweets". Parrish has made the experience that when 
 relating your resolutions to others it helps to frame them as rules. So instead 
@@ -391,16 +391,16 @@ of saying "I'm trying not to drink" say "I don't drink as a rule".
 
 Also note that punishments and rewards are less efficient than we might think.
 What's more helpful apart from designing your system to induce the desired
-behaviour is to make use of what other are doing. We are social animals and
+behavior is to make use of what other are doing. We are social animals and
 like to be conformist. Find a group of people who's consistently doing what you
 want to be doing and identify yourself as part of that group. I wouldn't dream
-of spending time programming in my freetime if I didn't feel like I'm competing
-with others that I see contributing to open source projects on github and
+of spending time programming in my free time if I didn't feel like I'm competing
+with others that I see contributing to open source projects on GitHub and
 racking amazing commit stats.
 
 The listing of these ideas and tools is rather haphazard. I'll need to
 categorize them as well. The overall category of the above is something like 
-coercion, motivation, habitualization
+coercion, motivation, habitualizations
 
 We have 
 
