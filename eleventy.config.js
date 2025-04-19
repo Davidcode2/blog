@@ -7,6 +7,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css/output.css");
   eleventyConfig.addPassthroughCopy("assets/favicon");
+  eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("posts/*.png", {
     filter: (file) => {
       if (file) {
@@ -22,8 +23,6 @@ export default function (eleventyConfig) {
     }
     return dateObj.toFormat(format);
   });
-
-  eleventyConfig.addPassthroughCopy("admin");
 
   // Actual default values
   const md = markdownit({
@@ -54,4 +53,11 @@ export default function (eleventyConfig) {
   if (process.env.ELEVENTY_RUN_MODE === "build") {
     eleventyConfig.addPlugin(plantUmlPlugin);
   }
+
+  eleventyConfig.addPairedShortcode("tldr", function(content) {
+    return `<div class="border-l rounded-lg my-4">
+      <div class="px-2 py-1 text-sm font-bold">tldr;</div>
+      <div class="p-2 text-gray-800">${content}</div>
+    </div>`;
+  });
 }
