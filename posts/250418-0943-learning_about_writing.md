@@ -6,7 +6,7 @@ layout: post-layout.njk
 ---
 
 As I write posts on this blog, I'm slowly familiarizing myself with the challenges of writing.
-I'm quite happy about having learned a while ago, i think in some youtube video, that one can
+I'm quite happy about having learned a while ago, i think in some YouTube video, that one can
 just hammer out the words that come to mind without stopping. This is an incredibly fun kind of 
 writing. I'm really happy to have come across this information.
 
@@ -17,9 +17,9 @@ Recently I got some confirmation for this strategy of simply hammering out the
 thoughts at speed by Richard E. Nisbett, in his book 
 ["Book: Mindware by Richard Nisbett"](../mindware_nisbett). He says that for any work to start
 happening on writing one must have something written down, even if it is the
-most ridiculous rough draft. The subconcsious needs to get primed or triggered
+most ridiculous rough draft. The subconscious needs to get primed or triggered
 to be able to tackle the task of forming a coherent structure out of the
-dicsonnected thoughts that initially flow to the page.
+disconnected thoughts that initially flow to the page.
 
 Up to this point I've been only hammering out stuff on the keyboard. So
 everything that can be read here until mid 2025 is something of a direct
@@ -35,12 +35,12 @@ it might be useful to zoom out a bit and look at the writing process as a whole.
 
 Why do I write in the first place? To get a better understanding of things I
 learn, be able to make connections between different topics and ideas, and to
-arrive at new insights that help me better undestand the world. It's also about 
+arrive at new insights that help me better understand the world. It's also about 
 improving my memory. Not by providing a written record (although that's useful too)
-but by concsiously processing the stuff that's floating around in my head. Clive Thompson 
+but by consciously processing the stuff that's floating around in my head. Clive Thompson 
 also talks about how writing can help organize ones thinking. More on this book here: ["Book: Smarter Than You Think"](../smarter_than_you_think). Another aspect is that writing like this is just a lot of fun.
 
-So thats my motivation as a hobby blogger. What might a person who would
+So that's my motivation as a hobby blogger. What might a person who would
 eventually like to make money by writing or someone like a software engineer
 who relies on good writing skills on the job need to get from his writing
 practice? A coherent structure would be nice to have. Also persuasiveness, to
@@ -51,7 +51,7 @@ arguments clearer to myself, and to question assumptions to get closer to a
 truth. I think Charlie Munger is attributed as saying something like "I don't
 allow myself an opinion on something unless I've thought all the thoughts that
 can be thought against it." I'm very sure what he said is different but the
-idea goes something like this. I'll have to look it up in Shane Parrishs book
+idea goes something like this. I'll have to look it up in Shane Parrish's book
 where I think I stumbled across that one.
 
 Notice how I am now linking to other posts in this blog? That's because now I've set up a separate
@@ -104,11 +104,11 @@ that would fit in with the post.
 
 Maybe the other way around is better, to contract at this stage and find the
 true purpose of the post and close in on the main idea that needs to be
-transported. To lend a term from Mortimer J. Adlers Book, "How to read a book",
+transported. To lend a term from Mortimer J. Adler's Book, "How to read a book",
 I could try to find the "unity" of the post. The unity is a description of a
 book only a few sentences long. I'm trying to get to the point where I can 
 start writing again after the conceptualization phase but am struggling 
-to find a segway there. The place I want to be after the conceptualization phase
+to find a segue there. The place I want to be after the conceptualization phase
 is to be as close as possible to be able to hammer again. But this time 
 with better structure and stronger arguments.
 
@@ -121,5 +121,5 @@ So maybe that's the way to go.
 
 To fantasize a little, wouldn't it be nice that at some point after extensive
 practice I would have the conceptualization phase so ingrained that it would
-happen subconsciously at the time of the first hammering. So I would end up
+happen subconsciously at the time of the first hammering? So I would end up
 with a polished post after half an hour of hammering out and enjoying myself.
