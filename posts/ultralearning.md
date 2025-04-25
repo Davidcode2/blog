@@ -4,7 +4,6 @@ date: 2025-03-22
 tags: post
 layout: post-layout.njk
 ---
-
 During my walk today I tried to recap my learnings from the book
 "Ultralearning" by Scott H. Young.
 
@@ -27,10 +26,10 @@ Scott is agnostic on whether Focus is an ability which can be trained like any
 other. I am pretty sure it is, based on my reading of Peak. 
 Focus is defined by the following attributes: 
 
-- ability to start focusing
-- ability to retain focus
-- ability to return to focus after the mind has wandered
-- the amount of focused work one can do in a given time period e.g. the
+* ability to start focusing
+* ability to retain focus
+* ability to return to focus after the mind has wandered
+* the amount of focused work one can do in a given time period e.g. the
   exhaustion of concentration
 
 This is based on what I learned in the book "Hyperfocus" and also by some 
@@ -50,7 +49,7 @@ recall now but probably during writing the other sections it will pop up.
 
 **Drills**
 
-Here things get practical. What exactly does one need to do to improve?  
+Here things get practical. What exactly does one need to do to improve?\
 Doing a project is straight forward but how exactly will building a website 
 make me a greater developer than any other learner who does the same?
 
@@ -86,14 +85,15 @@ one needs feedback. This can be in the form of a compiler warning or through the
 of a mentor.
 What are some aspects of good feedback?
 
-- **fast**: the feedback should ideally be instantaneous. This is a problem with graded assignments in a
-school or university scenario. By the time the feedback arrives it is basically useless. When practicing questions
-online, make sure find a service which gives you the correct answer immediately for you to review.
-- **directed**: Feedback comes in several forms. 
-    - basic: Tells you simply whether you've done good or bad but nothing more.
-    - specific: Tells you what you did wrong.
-    - directed: Tells you what you did wrong and how one can generally improve it.
-    - mentoring: The above plus advice tailored specifically to you.
+* **fast**: the feedback should ideally be instantaneous. This is a problem with graded assignments in a
+  school or university scenario. By the time the feedback arrives it is basically useless. When practicing questions
+  online, make sure find a service which gives you the correct answer immediately for you to review.
+* **directed**: Feedback comes in several forms. 
+
+  * basic: Tells you simply whether you've done good or bad but nothing more.
+  * specific: Tells you what you did wrong.
+  * directed: Tells you what you did wrong and how one can generally improve it.
+  * mentoring: The above plus advice tailored specifically to you.
 
 I can't remember the terms used by Scott, so I made these up. Ideally you want
 to get most of your feedback in the latter form. Finding a mentor isn't always
@@ -104,20 +104,15 @@ potential here.
 
 Here some strategies for retrieval are given:
 
-- spaced repetition
-    - flash cards (Anki)
-- active recall
-    - test to learn
-    - closed book learning
-- mnemonics
-    - method of loci
-    - visualization
-    - story telling / proceduralization
+* spaced repetition
 
-**Intuition**
+  * flash cards (Anki)
+* active recall
 
-TBD
+  * test to learn
+  * closed book learning
+* mnemonics
 
-**Experimentation**
-
-TBD
+  * method of loci
+  * visualization
+  * story telling / proceduralization
