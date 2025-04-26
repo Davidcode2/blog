@@ -6,7 +6,7 @@ layout: post-layout.njk
 ---
 
 I'm trying to understand some of the following: Nginx, networking, docker
-networks, TLS, Client Server communication, server to server communication..
+networks, TLS, Client Server communication, server to server communication.
 Playing around with PlantUML might help with that. It also has the nice side effect
 of giving me some practice with PlantUML.
 

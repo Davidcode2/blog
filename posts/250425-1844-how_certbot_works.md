@@ -9,7 +9,7 @@ Certbot is a tool which allows me to receive a certificate
 for my server by simply running a docker container.
 
 In this post I'll explore how this work. This builds on the learnings of the
-previous post [Understanding SSL](understanding_ssl/understanding_ssl).
+previous post [Understanding SSL](../understanding_ssl).
 To ensure communication between clients and my server is encrypted I need to
 have SSL. For that to work I need a certificate. For the encrypted
 communication a public and private key pair would in theory be sufficient. 
