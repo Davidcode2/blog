@@ -106,16 +106,9 @@ checked.
 
 ' Devices
 osa_laptop(client, "Client", "Firefox", "Browser")
-note left
-  * The client receives the servers certificate
-  * calculates the hash of the certificate
-  * receives the fingerprint (encrypted hash) of certificate
-  * decrypts using public key
-  * checks if hashes match
-  * reads certificate chain
-  * checks next certificate by following steps above
-end note
 osa_server(server, "Server", "nginx", "Web server")
+
+osa_database(operating_system, "Operating System", "OS", "Operating System")
 
 together {
   osa_server(intermediate_ca, "Intermediate CA", "Certificate Authority", "Certificate Authority")
@@ -125,19 +118,19 @@ together {
 ' Certificates
 osa_contract(server_certificate, "Server Fullchain Certificate", "Certificate","Certificate")
 
-together {
+rectangle "Certificate Bundle" as certs {
   osa_contract(intermediate_ca_certificate, "Intermediate CA Certificate", "Certificate","Certificate")
   osa_contract(root_ca_certificate, "Root CA Certificate", "Certificate","Certificate")
 }
 
-client --> server : 1. request 
-server --> server_certificate : provide
-server_certificate --> client 
+client -> server : request 
+server -> server_certificate : provide
+server_certificate -> client 
+server_certificate -> intermediate_ca_certificate : contains 
 
-client -> intermediate_ca : 2. request 
-intermediate_ca --> intermediate_ca_certificate : provide
-client -> root_ca : 3. request
-root_ca --> root_ca_certificate : provide
+server_certificate --> intermediate_ca: signed by
+intermediate_ca_certificate --> root_ca: signed by
+root_ca_certificate --> operating_system: trusted by
 
 @enduml
 
@@ -149,13 +142,13 @@ start
 
 :receive certificate;
 floating note right 
-  certificate contains 
+  the certificate usually contains 
   certificates of all 
   intermediate CAs and root CA
 end note
-while (more certificates in chain) is (true)
+while (is not root CA?) is (true)
   :calculate hash of certificate content;
-  :decrypt certificate signature;
+  :decrypt certificate signature using public key of issuer;
   :compare resulting hash with calculated hash;
   if (hashes match) then (yes)
     :continue down the chain;
@@ -163,8 +156,14 @@ while (more certificates in chain) is (true)
     :failure;
     end
   endif
-endwhile (all CAs processed) 
-
-stop
+endwhile (all intermediate CAs processed) 
+:verify root CA certificate against trusted anchors;
+if (root CA is trusted) then (yes)
+  :successfully established trust;
+  stop
+else (no)
+  :failure;
+  end
+endif
 
 @enduml
