@@ -24,6 +24,26 @@ server (it has the private key to decrypt it) have the master key, they can
 read each others messages. And the messages are encrypted while in transit. So
 that's the part of the actual communication at a high level. 
 
+The following diagram visualizes this process. 
+
+@startuml
+
+Client -> Server : request
+Server --> Client : certificate
+note left of Server : Certificate (fullchain.pem)
+note right of Server : Certificate mit private key\n (privkey.pem) bleibt auf Server
+Client -> Client : generate pre-master key, encrypt it with public key
+Client -> Server : send encrypted pre-master key
+Client -> Client
+Server -> Server
+note left Server : both client and server\ndo some magic to get master key
+Client -> Client : encrypt data with master key
+Client -> Server : exchange encrypted data
+Server -> Server : encrypt data with master key
+Server --> Client
+
+@enduml
+
 Now what about the certificates that lay on the server? These are a mystery to me. There
 are two of them. One of them may be called `fullchain` and the other `privkey`.
 So thinking about this and recollecting what I have read, these should serve the following purposes:
@@ -37,7 +57,7 @@ So thinking about this and recollecting what I have read, these should serve the
 
 Let's check what we got so far. Gemini and a quick verification web search
 tell me that the above reasoning is correct. The `fullchain` certificate
-contains the public key, some info about the certificate like who it was issued
+contains the public key, some info about the certificate, like who it was issued
 to, by whom (Certificate Authority) and when it will expire. Beyond that it contains
 the intermediate CA or CAs which enable the client to trace the chain of trust 
 back to the Root CA.
@@ -121,3 +141,30 @@ root_ca --> root_ca_certificate : provide
 
 @enduml
 
+Let's explore how the certificates get checked by the client.
+
+@startuml
+
+start
+
+:receive certificate;
+floating note right 
+  certificate contains 
+  certificates of all 
+  intermediate CAs and root CA
+end note
+while (more certificates in chain) is (true)
+  :calculate hash of certificate content;
+  :decrypt certificate signature;
+  :compare resulting hash with calculated hash;
+  if (hashes match) then (yes)
+    :continue down the chain;
+  else (no)
+    :failure;
+    end
+  endif
+endwhile (all CAs processed) 
+
+stop
+
+@enduml
