@@ -5,9 +5,8 @@ tags: post
 layout: post-layout.njk
 ---
 
-Here's what I've planned to do today: Write a blog post about what I have
-learned from the various books that I've read or reread over the past couple of
-months.
+This is a brain dump about my learnings from the various books that I've read
+or reread over the past couple of months.
 
 ## Life's task
 
@@ -16,12 +15,12 @@ Also building habits and thinking. I want to explore what these learnings could
 mean to me personally and how I could utilize them in everyday life to get
 closer to my goals. It is also worth noting that happiness should play a large
 role in all of this as well. I think that when focusing too much on the
-performance aspect of it all, happiness and what is really  important in life
+performance aspect of it all, happiness and what is really important in life
 falls to the wayside. This is something that Cal Newport nicely reflects in his
-book deep work. I think he says something like that working is actually more
-enjoyable then leisure time. Also he says to figure out what the most important
-things in ones life are. Robert Greene in Mastery calls this "finding the life's
-task".
+book Deep Work. I think he says something like working is actually more
+enjoyable than leisure time. He urges us to figure out what the most important
+things in ones life are. Robert Greene in his book Mastery calls this "finding
+the life's task".
 
 I've thought that for me that would be learning. Figuring out how to use the
 brain in such a way as to be able to adapt and learn new things fast.
@@ -50,10 +49,7 @@ playwright to run tasks in the browser.
 When looking at that kind of stuff and also at the profiles of maintainers of
 some of these projects I can't help but think that I am hopelessly incapable in
 comparison. But then they focused on something else. And they did so for long
-enough for me to see them do it. I guess if I continued working on web projects
-for long enough at some point someone just like me right now would stumble over
-my profile and think the same thing. How could someone achieve so much and have
-such skill? I guess the answer is focus and time. 
+enough for me to see them do it. I guess it comes down focus and time. 
 
 ## Building expertise over time
 
@@ -63,11 +59,7 @@ cross when we are both 30. It would in fact be surprising if the person would
 not be twice as good as I am. And I guess when comparing something as closely
 defined as that, programming in a specific domain like web development, then
 one can start focusing on learning and strategies. But before that it's just a
-matter of time and focus. So that's the big thing, the thing to focus on. Like
-the interest rate is more important than the amount of money that you put in.
-If the one too small then it doesn't matter how much of the other thing you
-throw at it. The result will still be bad. So it is really important to focus
-on the right thing.
+matter of time and focus. So that's the big thing.
 
 ## Diminishing returns
 
@@ -79,26 +71,18 @@ is a nice skill to have but in ten years time will it really still be that
 important? I guess the question here is what to focus on when learning
 something new.
 
-I'll have to stop the computer now because its running insanely hot. It's a lot
-better now so maybe it was just because i was placing the laptop on a blanket
-and too little air was getting through.
-
 ## Categorizing
 
 So my thoughts so far bring me to a categorization that I'd like to make. The
-number one thing that we have and should focus on is our life. This means we
-have a resource that is exhaustible and should be valued above all else: that
-is Time. 
-
-To further specify that, we should consider that not all time is equal.
-We need to rest, sleep and take care of our bodies. So the resource we 
-have and should guard is quality time. Quality time can be defined as time 
-that we have available to us where we are free to choose what to do.
+number one thing that we should focus on is our life. This means we
+have a resource that is exhaustible and should be valued above all else: time. 
+After subtracting time needed for sleep and other necessities we are left with
+the time during which we are free to choose what to do.
 
 ## Quality Time
 
 This is already a large topic which could be discussed in great detail. One
-thing that comes to mind is energy. This is something that we have control
+thing that comes to mind is energy. This is something that we have some control
 over. We might have a lot of time at our disposal but if we are tired or not
 functioning at our best this time cannot be optimally utilized. This means
 we need to take care of sleep, exercise and nutrition as well as mental health.
@@ -118,7 +102,7 @@ him closer to his goals.
 ## What to do with the time
 
 Now that we have thought about time and it's allocation, we can start thinking
-about what to do with it. So this is about the what. And here we can think
+about what to do with it. So this is about the What. And here we can think
 about what is really important to us. This is about life's questions, life's task
 and the most important things in life. The things that are easy to agree on are
 health, family and human connection. Next up is purpose. This is a bit more
@@ -132,7 +116,7 @@ tend to gravitate toward preserving energy and therefore doing easy things.
 
 ## Questioning Life's Task
 
-To move on let's try to go deeper into the what. I've established that I enjoy
+To move on let's try to go deeper into the What. I've established that I enjoy
 learning. But maybe let's in fact take a step back and think about that. Why
 learning? What benefit does it bring me and others in the world? To go back to
 very basic things. I work my job and am therefore able to make a living. I can
@@ -148,23 +132,22 @@ be respected and thought of as smart? Because I want to be liked. Why do I want
 to be liked? Because I need the support of other to survive. Why do I need the
 support of other to survive? Because I am utterly incapable of surviving on my
 own. Why is that so? Because I grew up in a world which everything is
-interconnected and splintered. Ok how many whys was that? Six. It felt like a
-lot more. Very interesting exercise. Ok so let's analyze that.
+interconnected and splintered. 
+Very interesting exercise. Ok so let's analyze that.
 
 I like learning because I want to survive. But also because I want to be loved.
 Now I could discuss whether learning about the world is the best way to be
 loved. There are likely many other factors that play a larger role in being
-loved, so I should definitely make sure to invest time in those. In fact it is
-absolutely imperative to invest time into that. For the other topic of making
-money e.g. surviving: We are made to believe that we need to be highly skilled
-in order to make a living. But I guess we would be able to get by without being
-a master in our field. I'm thinking that we gain a lot of enjoyment from being
-so good at what we do that others look to us for advice and help. 
+loved, so I should definitely make sure to invest time in those. For the other
+topic of making money e.g. surviving: We are made to believe that we need to be
+highly skilled in order to make a living. But I guess we would be able to get
+by without being a master in our field. I'm thinking that we gain a lot of
+enjoyment from being so good at what we do that others look to us for advice
+and help. 
 
-So this might
-have something to do with having a decent place in society. From what I read I
-learned that humans do set up hierarchies between people and it is beneficial
-to secure a decent place in those hierarchies.
+So this might have something to do with having a decent place in society. From
+what I read I learned that humans do set up hierarchies between people and it
+is beneficial to secure a decent place in those hierarchies.
 
 ### Hierarchies
 
@@ -391,24 +374,13 @@ of saying "I'm trying not to drink" say "I don't drink as a rule".
 
 Also note that punishments and rewards are less efficient than we might think.
 What's more helpful apart from designing your system to induce the desired
-behavior is to make use of what other are doing. We are social animals and
-like to be conformist. Find a group of people who's consistently doing what you
-want to be doing and identify yourself as part of that group. I wouldn't dream
-of spending time programming in my free time if I didn't feel like I'm competing
-with others that I see contributing to open source projects on GitHub and
-racking amazing commit stats.
+behavior is to make use of what other are doing. We are social animals and like
+to be conformist. Find a group of people who's consistently doing what you want
+to be doing and identify yourself as part of that group. I wouldn't dream of
+spending time programming in my free time if I didn't feel like I'm somehow
+associated to the people I see contributing to open source projects on GitHub
+and racking up amazing commit stats.
 
 The listing of these ideas and tools is rather haphazard. I'll need to
 categorize them as well. The overall category of the above is something like 
 coercion, motivation, habitualizations
-
-We have 
-
-- identity change
-- system design
-- believes
-- speech (changing what we say)
-  - rules
-  - affirmations
-  - self-fulfilling prophecies
-- 
