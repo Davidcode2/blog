@@ -82,17 +82,14 @@ content. It then encrypts the hash using the CAs private key. This encrypted has
 is attached to the issued certificate.
 
 The client will upon receiving a certificate calculate the hash of it. It will
-then decrypt the signature using the CAs public key. If the decrypted signature
-matches the calculated hash, the CAs certificate is trusted.
+then decrypt the signature using the public key of the CA which signed it. If
+the decrypted signature matches the calculated hash, the CAs certificate is
+trusted.
 
 ![Walking the chain of trust](./250312-2205-walking_the_chain_of_trust.png)
 
 The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.
-I'll need to come back to this as I haven't had the opportunity to fact check
-it and deepen my understanding. I'd also like to add a sequence diagram which
-digs into more detail on how the certificates / signatures of each CA get
-checked.
 
 @startuml
 
