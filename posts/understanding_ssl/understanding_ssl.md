@@ -138,6 +138,7 @@ Let's explore how the certificates get checked by the client.
 start
 
 :receive certificate;
+:start walking chain of trust;
 floating note right 
   the certificate usually contains 
   certificates of all 

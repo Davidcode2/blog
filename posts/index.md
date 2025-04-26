@@ -16,3 +16,4 @@
 [Improve blogging](improving_blogging)
 [Trying to synthesize learnings on life design](250417-1718-trying_to_synthesize_learnings_on_life_design)
 [Learning about writing](250418-0943-learning_about_writing)
+[How certbot works](250425-1844-how_certbot_works)
