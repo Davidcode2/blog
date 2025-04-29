@@ -107,15 +107,15 @@ read each others messages. And the messages are encrypted while in transit. So
 that's the part of the actual communication at a high level.</p>
 <p>The following diagram visualizes this process.</p>
 
-<div class="plantuml-container" id="plantuml-1745669490227-538">
+<div class="plantuml-container" id="plantuml-1745958846087-187">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745669490227-538">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745669490227-538">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1745958846087-187">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1745958846087-187">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745669490227-538">
+  <div class="tab-content" data-tab-content="image-plantuml-1745958846087-187">
     <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745669490227-538">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1745958846087-187">
     <pre><code>@startuml
 Client -&gt; Server : request
 Server --&gt; Client : certificate
@@ -135,7 +135,7 @@ Server --&gt; Client
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745669490227-538');
+    const container = document.getElementById('plantuml-1745958846087-187');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -190,15 +190,15 @@ trusted.</p>
 <p>The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.</p>
 
-<div class="plantuml-container" id="plantuml-1745669493104-470">
+<div class="plantuml-container" id="plantuml-1745958848798-187">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745669493104-470">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745669493104-470">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1745958848798-187">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1745958848798-187">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745669493104-470">
+  <div class="tab-content" data-tab-content="image-plantuml-1745958848798-187">
     <img src="/posts/understanding_ssl/understanding_ssl_002.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745669493104-470">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1745958848798-187">
     <pre><code>@startuml
 !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
 !include osaPuml/Common.puml
@@ -233,7 +233,7 @@ root_ca_certificate --&gt; operating_system: trusted by
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745669493104-470');
+    const container = document.getElementById('plantuml-1745958848798-187');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -251,15 +251,15 @@ root_ca_certificate --&gt; operating_system: trusted by
 
 <p>Let's explore how the certificates get checked by the client.</p>
 
-<div class="plantuml-container" id="plantuml-1745669493942-920">
+<div class="plantuml-container" id="plantuml-1745958849639-464">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745669493942-920">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745669493942-920">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1745958849639-464">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1745958849639-464">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745669493942-920">
+  <div class="tab-content" data-tab-content="image-plantuml-1745958849639-464">
     <img src="/posts/understanding_ssl/understanding_ssl_003.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745669493942-920">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1745958849639-464">
     <pre><code>@startuml
 start
 :receive certificate;
@@ -293,7 +293,7 @@ endif
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745669493942-920');
+    const container = document.getElementById('plantuml-1745958849639-464');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
