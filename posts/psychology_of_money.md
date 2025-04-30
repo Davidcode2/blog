@@ -34,11 +34,11 @@ over, your not going to be more happy for it. At some point we set ourselves a
 goal and think we’ll be good when we reach that. Don’t fall into the trap of
 reaching for ever more. Enough is really enough. Cover your basic needs and
 maybe some extra. But do you really need a sports car and a home with more
-bedrooms than occupants? Don’t compare yourself to others. I once thought if I
-make 50k a year I’m pretty good. Now I make 60 and think I should be going more
-toward 75. Maybe that’s a mistake. I can afford all I need and then some, so
-maybe I can stop worrying and enjoy the good fortune that I have while I have
-it.
+bedrooms than occupants? Don’t compare yourself to others. At some point in my
+life I thought I'd get along fine with little money. Now that I have a job, I'm
+thinking I should reach for more. Maybe that’s a mistake. I can afford all I
+need and then some, so maybe I can stop worrying and enjoy the good fortune
+that I have while I have it.
 
 ## Confounding compounding
 
