@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A software engineers personal blog. Sandbox for learning about tech, personal improvement and all kinds of other things. Expect errors.">
     <link rel="stylesheet" href="/css/output.css">
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/lightfair.min.css">
@@ -107,15 +108,15 @@ read each others messages. And the messages are encrypted while in transit. So
 that's the part of the actual communication at a high level.</p>
 <p>The following diagram visualizes this process.</p>
 
-<div class="plantuml-container" id="plantuml-1745990952044-540">
+<div class="plantuml-container" id="plantuml-1746386985221-225">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745990952044-540">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745990952044-540">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1746386985221-225">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1746386985221-225">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745990952044-540">
+  <div class="tab-content" data-tab-content="image-plantuml-1746386985221-225">
     <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745990952044-540">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1746386985221-225">
     <pre><code>@startuml
 Client -&gt; Server : request
 Server --&gt; Client : certificate
@@ -135,7 +136,7 @@ Server --&gt; Client
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745990952044-540');
+    const container = document.getElementById('plantuml-1746386985221-225');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -190,15 +191,15 @@ trusted.</p>
 <p>The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.</p>
 
-<div class="plantuml-container" id="plantuml-1745990954730-445">
+<div class="plantuml-container" id="plantuml-1746386988047-932">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745990954730-445">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745990954730-445">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1746386988047-932">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1746386988047-932">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745990954730-445">
+  <div class="tab-content" data-tab-content="image-plantuml-1746386988047-932">
     <img src="/posts/understanding_ssl/understanding_ssl_002.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745990954730-445">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1746386988047-932">
     <pre><code>@startuml
 !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
 !include osaPuml/Common.puml
@@ -233,7 +234,7 @@ root_ca_certificate --&gt; operating_system: trusted by
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745990954730-445');
+    const container = document.getElementById('plantuml-1746386988047-932');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
@@ -251,15 +252,15 @@ root_ca_certificate --&gt; operating_system: trusted by
 
 <p>Let's explore how the certificates get checked by the client.</p>
 
-<div class="plantuml-container" id="plantuml-1745990955554-846">
+<div class="plantuml-container" id="plantuml-1746386988873-613">
   <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1745990955554-846">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1745990955554-846">Code</button>
+    <button class="tab-button active" data-tab="image-plantuml-1746386988873-613">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1746386988873-613">Code</button>
   </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1745990955554-846">
+  <div class="tab-content" data-tab-content="image-plantuml-1746386988873-613">
     <img src="/posts/understanding_ssl/understanding_ssl_003.png" alt="PlantUML Diagram">
   </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1745990955554-846">
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1746386988873-613">
     <pre><code>@startuml
 start
 :receive certificate;
@@ -293,7 +294,7 @@ endif
 </div>
 <script>
   (function() {
-    const container = document.getElementById('plantuml-1745990955554-846');
+    const container = document.getElementById('plantuml-1746386988873-613');
     const buttons = container.querySelectorAll('.tab-button');
     const contents = container.querySelectorAll('.tab-content');
 
