@@ -30,7 +30,7 @@ losses. Don’t be too hard on yourself.
 ## Never enough
 
 Try to keep the goalposts from moving. If you allow lifestyle creep to take
-over, your not going to be more happy for it. At some point we set ourselves a
+over, you're not going to be more happy for it. At some point we set ourselves a
 goal and think we’ll be good when we reach that. Don’t fall into the trap of
 reaching for ever more. Enough is really enough. Cover your basic needs and
 maybe some extra. But do you really need a sports car and a home with more
