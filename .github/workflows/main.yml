@@ -1,26 +1,83 @@
-#on: 
-#  push:
-#    branches:
-#      - main
-#      - master
-#jobs: 
-#  ssh_deploy:
-#    runs-on: ubuntu-latest
-#    steps:  
-#    - name: Check out repository code
-#      uses: actions/checkout@v3
-#      
-#    - name: ssh deploy
-#      uses: easingthemes/ssh-deploy@v5.0.3
-#      with:
-#        SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
-#        REMOTE_HOST: ${{ secrets.SERVER_ADDRESS }}
-#        REMOTE_USER: ${{ secrets.USER_NAME }}
-#        REMOTE_PORT: 22
-#        TARGET: /root/teachme/blog
-#        EXCLUDE: /.git/
-#        SCRIPT_AFTER: |
-#          cd /root/teachme
-#          docker compose build blog || exit 1
-#          docker compose up -d blog || exit 1
-#        SCRIPT_AFTER_REQUIRED: true
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: ${{ github.repository }}
+  REGISTRY: ghcr.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,enable=true
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+
+    steps:
+      - name: Set up SSH access
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
+
+      - name: Deploy on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_ADDRESS }} << 'EOF'
+            IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
+            CONTAINER_NAME=${{ github.repository }}
+            NETWORK_NAME=app-network
+
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            
+            docker container stop \$CONTAINER_NAME || true
+            docker container rm \$CONTAINER_NAME || true
+            docker pull \$IMAGE_NAME
+
+            docker run -d \
+              --name \$CONTAINER_NAME \
+              --network \$NETWORK_NAME \
+              \$IMAGE_NAME
+
+            docker image prune -f
+          EOF
+
