@@ -63,21 +63,24 @@ jobs:
       - name: Deploy on server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_ADDRESS }} << 'EOF'
-            IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
-            CONTAINER_NAME=${{ github.event.repository.name }}
+            FULL_IMAGE_NAME="ghcr.io/${{ github.repository }}"
+            IMAGE_NAME_LOWER=\$(echo "\$FULL_IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
+            CONTAINER_NAME=\$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
             NETWORK_NAME=app-network
 
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-            
+
             docker container stop $CONTAINER_NAME || true
             docker container rm $CONTAINER_NAME || true
-            docker pull $IMAGE_NAME
+            docker pull $IMAGE_NAME_LOWER:latest
 
             docker run -d \
               --name $CONTAINER_NAME \
               --network $NETWORK_NAME \
-              $IMAGE_NAME
+              $IMAGE_NAME_LOWER:latest
 
             docker image prune -f
           EOF
+
+
 
