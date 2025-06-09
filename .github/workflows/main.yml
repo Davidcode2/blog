@@ -69,14 +69,14 @@ jobs:
 
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
             
-            docker container stop \$CONTAINER_NAME || true
-            docker container rm \$CONTAINER_NAME || true
-            docker pull \$IMAGE_NAME
+            docker container stop $CONTAINER_NAME || true
+            docker container rm $CONTAINER_NAME || true
+            docker pull $IMAGE_NAME
 
             docker run -d \
-              --name \$CONTAINER_NAME \
-              --network \$NETWORK_NAME \
-              \$IMAGE_NAME
+              --name $CONTAINER_NAME \
+              --network $NETWORK_NAME \
+              $IMAGE_NAME
 
             docker image prune -f
           EOF
