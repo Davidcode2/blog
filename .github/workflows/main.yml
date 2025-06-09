@@ -64,7 +64,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_ADDRESS }} << 'EOF'
             IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
-            CONTAINER_NAME=${{ github.repository.name }}
+            CONTAINER_NAME=${{ github.event.repository.name }}
             NETWORK_NAME=app-network
 
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
