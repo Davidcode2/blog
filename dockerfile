@@ -18,7 +18,7 @@ RUN npm run build
 FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN echo "text/yaml                   yaml yml;" >> /etc/nginx/mime.types
+#RUN echo "text/yaml                   yaml yml;" >> /etc/nginx/mime.types
 COPY --from=builder /app/_site /var/www/html
 
 EXPOSE 80
