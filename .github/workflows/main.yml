@@ -12,14 +12,16 @@ env:
 jobs:
   connect-to-aws:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Configure AWS Credentials Action for GitHub Actions
         uses: aws-actions/configure-aws-credentials@v4.2.1
-        aws-region: eu-central-1
-        role-to-assume: arn:aws:iam::${secrets.AWS_ACCOUNT_ID}:role/ci-role 
-        permissions:
-          id-token: write
-          contents: read
+        with:
+          aws-region: eu-central-1
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/ci-role 
 
 #  build-and-push:
 #    runs-on: ubuntu-latest
