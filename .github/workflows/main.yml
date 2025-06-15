@@ -96,14 +96,13 @@ jobs:
       - name: Retrieve SSH private key from SSM
         run: |
           key=$(aws ssm get-parameter \
-            --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
+            --name "/ssh/hetzner-cloud-server-1/openssl_deployment_private_ssh_key" \
             --with-decryption \
             --query 'Parameter.Value' \
-            --output text | sed 's/\\n/\n/g')
+            --output text)
 
           eval "$(ssh-agent -s)"
-          echo -e "$key" | openssl pkcs8 -inform PEM -outform PEM -nocrypt | ssh-add -
-          mkdir -p ~/.ssh
+          echo -e "$key" | ssh-add -
 
       - name: Deploy on server
         run: |
