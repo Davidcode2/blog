@@ -100,7 +100,6 @@ jobs:
             --with-decryption \
             --query 'Parameter.Value' \
             --output text)
-          chmod 600 id_priv_key
           echo "PRIVATE_SSH_KEY<<EOF" >> $GITHUB_ENV
           echo "$key" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
