@@ -99,7 +99,7 @@ jobs:
             --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
             --with-decryption \
             --query 'Parameter.Value' \
-            --output text | sed 's/\\n/\n/g')
+            --output text)
 
           echo "::add-mask::$key"
           eval "$(ssh-agent -s)"
