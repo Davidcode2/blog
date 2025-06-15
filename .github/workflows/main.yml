@@ -100,18 +100,11 @@ jobs:
             --with-decryption \
             --query 'Parameter.Value' \
             --output text | sed 's/\\n/\n/g')
-          echo "$key" > private_key.pem
-          chmod 600 private_key.pem
-          {
-            echo "PRIVATE_SSH_KEY<<EOF"
-            echo "$key"
-            echo "EOF"
-          } >> $GITHUB_ENV
 
-      - name: Set up SSH access
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ env.PRIVATE_SSH_KEY }}
+          echo "::add-mask::$key"
+          eval "$(ssh-agent -s)"
+          ssh-add <(echo "$key")
+          mkdir -p ~/.ssh
 
       - name: Deploy on server
         run: |
