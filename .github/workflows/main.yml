@@ -10,8 +10,26 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for relevant changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            posts:
+              - 'posts/**'
+
   connect-to-aws:
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.src == 'true' || github.event_name == 'workflow_dispatch'
 
     permissions:
       id-token: write
@@ -23,77 +41,100 @@ jobs:
           aws-region: eu-central-1
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/ci-role 
 
-#  build-and-push:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#
-#      - name: Log in to GitHub Container Registry
-#        uses: docker/login-action@v3
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v3
-#
-#      - name: Extract Docker metadata
-#        id: meta
-#        uses: docker/metadata-action@v5
-#        with:
-#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-#          tags: |
-#            type=raw,value=latest,enable={{is_default_branch}}
-#            type=sha,enable=true
-#
-#      - name: Build and push Docker image
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          file: dockerfile
-#          push: true
-#          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
-#          cache-from: type=gha
-#          cache-to: type=gha,mode=max
-#
-#  deploy:
-#    runs-on: ubuntu-latest
-#    needs: build-and-push
-#
-#    steps:
-#      - name: Set up SSH access
-#        uses: webfactory/ssh-agent@v0.9.0
-#        with:
-#          ssh-private-key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
-#
-#      - name: Deploy on server
-#        run: |
-#          ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_ADDRESS }} << 'EOF'
-#            FULL_IMAGE_NAME="ghcr.io/${{ github.repository }}"
-#            IMAGE_NAME_LOWER=$(echo "$FULL_IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
-#            CONTAINER_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-#            NETWORK_NAME=app-network
-#
-#            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-#
-#            docker container stop $CONTAINER_NAME || true
-#            docker container rm $CONTAINER_NAME || true
-#            docker pull $IMAGE_NAME_LOWER:latest
-#
-#            docker run -d \
-#              --name $CONTAINER_NAME \
-#              --network $NETWORK_NAME \
-#              $IMAGE_NAME_LOWER:latest
-#
-#            docker image prune -f
-#          EOF
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: connect-to-aws
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,enable=true
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+
+    steps:
+      - name: Get IP address from SSM
+        id: get-server-ip
+        run: |
+          ip=$(aws ssm get-parameter \
+            --name "/compute/hetzner-cloud-server-1/host" \
+            --query 'Parameter.Value' \
+            --output text)
+          echo "host_ip=$ip" >> "$GITHUB_OUTPUT"
+
+      - name: Retrieve SSH private key from SSM
+        run: |
+          key=$(aws ssm get-parameter \
+            --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
+            --with-decryption \
+            --query 'Parameter.Value' \
+            --output text)
+          chmod 600 id_priv_key
+          echo "PRIVATE_SSH_KEY<<EOF" >> $GITHUB_ENV
+          echo "$key" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Set up SSH access
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ env.PRIVATE_SSH_KEY }}
+
+      - name: Deploy on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ steps.get-server-ip.outputs.host_ip }} << 'EOF'
+            FULL_IMAGE_NAME="ghcr.io/${{ github.repository }}"
+            IMAGE_NAME_LOWER=$(echo "$FULL_IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
+            CONTAINER_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            NETWORK_NAME=app-network
+
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+            docker container stop $CONTAINER_NAME || true
+            docker container rm $CONTAINER_NAME || true
+            docker pull $IMAGE_NAME_LOWER:latest
+
+            docker run -d \
+              --name $CONTAINER_NAME \
+              --network $NETWORK_NAME \
+              $IMAGE_NAME_LOWER:latest
+
+            docker image prune -f
+          EOF
 
 
 
