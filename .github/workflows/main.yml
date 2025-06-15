@@ -106,7 +106,7 @@ jobs:
 
       - name: Deploy on server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ steps.get-server-ip.outputs.host_ip }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no root@${{ steps.get-server-ip.outputs.host_ip }} << 'EOF'
             FULL_IMAGE_NAME="ghcr.io/${{ github.repository }}"
             IMAGE_NAME_LOWER=$(echo "$FULL_IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
             CONTAINER_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
