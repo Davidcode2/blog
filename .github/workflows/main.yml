@@ -99,7 +99,7 @@ jobs:
             --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
             --with-decryption \
             --query 'Parameter.Value' \
-            --output text)
+            --output text | sed 's/\\n/\n/g')
           echo "PRIVATE_SSH_KEY<<EOF" >> $GITHUB_ENV
           echo "$key" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
