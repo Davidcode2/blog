@@ -101,6 +101,7 @@ jobs:
             --query 'Parameter.Value' \
             --output text)
 
+          eval "$(ssh-agent -s)"
           echo -e "$key" | openssl pkcs8 -inform PEM -outform PEM -nocrypt | ssh-add -
           mkdir -p ~/.ssh
 
