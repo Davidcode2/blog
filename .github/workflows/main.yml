@@ -95,8 +95,6 @@ jobs:
 
       - name: Retrieve SSH private key from SSM
         run: |
-          set -euo pipefail
-          set +x
           key=$(aws ssm get-parameter \
             --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
             --with-decryption \
