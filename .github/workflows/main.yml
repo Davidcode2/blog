@@ -101,8 +101,14 @@ jobs:
             --query 'Parameter.Value' \
             --output text)
 
-          eval "$(ssh-agent -s)"
-          echo -e "$key" | ssh-add -
+          echo "PRIVATE_SSH_KEY<<EOF" >> $GITHUB_ENV
+          echo "$key" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Start ssh-agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ env.PRIVATE_SSH_KEY }}
 
       - name: Deploy on server
         run: |
