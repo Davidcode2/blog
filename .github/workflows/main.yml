@@ -95,15 +95,15 @@ jobs:
 
       - name: Retrieve SSH private key from SSM
         run: |
+          set -euo pipefail
+          set +x
           key=$(aws ssm get-parameter \
             --name "/ssh/hetzner-cloud-server-1/deployment_private_ssh_key" \
             --with-decryption \
             --query 'Parameter.Value' \
             --output text)
 
-          echo "::add-mask::$key"
-          eval "$(ssh-agent -s)"
-          ssh-add <(echo "$key")
+          echo -e "$key" | openssl pkcs8 -inform PEM -outform PEM -nocrypt | ssh-add -
           mkdir -p ~/.ssh
 
       - name: Deploy on server
