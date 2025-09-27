@@ -116,3 +116,4 @@ Here some strategies for retrieval are given:
   * method of loci
   * visualization
   * story telling / proceduralization
+   
