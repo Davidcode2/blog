@@ -40,7 +40,7 @@ The common thread is the spirit of inquiry and the desire to understand the worl
 
 ## 🗺️ Navigating the Digital Garden
 
-The live version of this blog can be found at [learningcorner.netlify.app/](https://learningcorner.netlify.app/). Feel free to wander through the articles and see what resonates with you.
+The live version of this blog can be found at [blog.jakob-lingel.dev](https://blog.jakob-lingel.dev). Feel free to wander through the articles and see what resonates with you.
 
 ## ✨ Contributing (In Spirit)
 
