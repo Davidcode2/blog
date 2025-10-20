@@ -14,7 +14,7 @@ jobs:
   check-for-changes:
     runs-on: ubuntu-latest
     outputs:
-      src: ${{ steps.filter.outputs.posts }}
+      posts: ${{ steps.filter.outputs.posts }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
