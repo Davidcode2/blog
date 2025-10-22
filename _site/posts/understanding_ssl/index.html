@@ -108,18 +108,8 @@ server (it has the private key to decrypt it) have the master key, they can
 read each others messages. And the messages are encrypted while in transit. So
 that's the part of the actual communication at a high level.</p>
 <p>The following diagram visualizes this process.</p>
-
-<div class="plantuml-container" id="plantuml-1760972270161-746">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972270161-746">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972270161-746">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972270161-746">
-    <img src="/posts/understanding_ssl/understanding_ssl_001.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972270161-746">
-    <pre><code>@startuml
-Client -&gt; Server : request
+<p>@startuml</p>
+<p>Client -&gt; Server : request
 Server --&gt; Client : certificate
 note left of Server : Certificate (fullchain.pem)
 note right of Server : Certificate mit private key\n (privkey.pem) bleibt auf Server
@@ -131,28 +121,8 @@ note left Server : both client and server\ndo some magic to get master key
 Client -&gt; Client : encrypt data with master key
 Client -&gt; Server : exchange encrypted data
 Server -&gt; Server : encrypt data with master key
-Server --&gt; Client
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972270161-746');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+Server --&gt; Client</p>
+<p>@enduml</p>
 <p>Now what about the certificates that lay on the server? These are a mystery to me. There
 are two of them. One of them may be called <code>fullchain</code> and the other <code>privkey</code>.
 So thinking about this and recollecting what I have read, these should serve the following purposes:</p>
@@ -176,7 +146,7 @@ So when the browser receives a certificate, it will check the intermediate
 authorities and trace them back to a root authority. If the root authority is
 trusted (i.e. is stored in the browsers list) all is fine.</p>
 <p>Here's how this hierarchy might look like:</p>
-<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/OEgpARfnM4-1223.webp 1223w"><img src="/posts/understanding_ssl/OEgpARfnM4-1223.jpeg" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=webp&via=transform 1223w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2131-chain_of_trust.png&width=1223&format=jpeg&via=transform" alt="Chain of trust visualization" width="1223" height="240"></picture></p>
 <p>But how can this be checked? There would need to be some way for the browser to
 verify that the root authority is legit and that it trusts the intermediate
 authorities.</p>
@@ -188,83 +158,43 @@ is attached to the issued certificate.</p>
 then decrypt the signature using the public key of the CA which signed it. If
 the decrypted signature matches the calculated hash, the CAs certificate is
 trusted.</p>
-<p><picture><source type="image/webp" srcset="/posts/understanding_ssl/PmCHvxCOEm-643.webp 643w"><img src="/posts/understanding_ssl/PmCHvxCOEm-643.jpeg" alt="Walking the chain of trust" width="643" height="48"></picture></p>
+<p><picture><source type="image/webp" srcset="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=webp&via=transform 643w"><img src="/.11ty/image/?src=posts%2Funderstanding_ssl%2F250312-2205-walking_the_chain_of_trust.png&width=643&format=jpeg&via=transform" alt="Walking the chain of trust" width="643" height="48"></picture></p>
 <p>The following diagram is a first attempt at working with icon libs in PlantUML.
 This is an attempt to better understand how the chain of trust is verified.</p>
-
-<div class="plantuml-container" id="plantuml-1760972272532-636">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972272532-636">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972272532-636">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972272532-636">
-    <img src="/posts/understanding_ssl/understanding_ssl_002.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972272532-636">
-    <pre><code>@startuml
-!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+<p>@startuml</p>
+<p>!define osaPuml <a href="https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master">https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master</a>
 !include osaPuml/Common.puml
 !include osaPuml/User/all.puml
 !include osaPuml/Hardware/all.puml
 !include osaPuml/Misc/all.puml
 !include osaPuml/Server/all.puml
-!include osaPuml/Site/all.puml
-' Devices
-osa_laptop(client, "Client", "Firefox", "Browser")
-osa_server(server, "Server", "nginx", "Web server")
-osa_database(operating_system, "Operating System", "OS", "Operating System")
-together {
-osa_server(intermediate_ca, "Intermediate CA", "Certificate Authority", "Certificate Authority")
-osa_server(root_ca, "Root CA", "Certificate Authority", "Certificate Authority")
-}
-' Certificates
-osa_contract(server_certificate, "Server Fullchain Certificate", "Certificate","Certificate")
-rectangle "Certificate Bundle" as certs {
-osa_contract(intermediate_ca_certificate, "Intermediate CA Certificate", "Certificate","Certificate")
-osa_contract(root_ca_certificate, "Root CA Certificate", "Certificate","Certificate")
-}
-client -&gt; server : request
+!include osaPuml/Site/all.puml</p>
+<p>' Devices
+osa_laptop(client, &quot;Client&quot;, &quot;Firefox&quot;, &quot;Browser&quot;)
+osa_server(server, &quot;Server&quot;, &quot;nginx&quot;, &quot;Web server&quot;)</p>
+<p>osa_database(operating_system, &quot;Operating System&quot;, &quot;OS&quot;, &quot;Operating System&quot;)</p>
+<p>together {
+osa_server(intermediate_ca, &quot;Intermediate CA&quot;, &quot;Certificate Authority&quot;, &quot;Certificate Authority&quot;)
+osa_server(root_ca, &quot;Root CA&quot;, &quot;Certificate Authority&quot;, &quot;Certificate Authority&quot;)
+}</p>
+<p>' Certificates
+osa_contract(server_certificate, &quot;Server Fullchain Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)</p>
+<p>rectangle &quot;Certificate Bundle&quot; as certs {
+osa_contract(intermediate_ca_certificate, &quot;Intermediate CA Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)
+osa_contract(root_ca_certificate, &quot;Root CA Certificate&quot;, &quot;Certificate&quot;,&quot;Certificate&quot;)
+}</p>
+<p>client -&gt; server : request
 server -&gt; server_certificate : provide
 server_certificate -&gt; client
-server_certificate -&gt; intermediate_ca_certificate : contains
-server_certificate --&gt; intermediate_ca: signed by
+server_certificate -&gt; intermediate_ca_certificate : contains</p>
+<p>server_certificate --&gt; intermediate_ca: signed by
 intermediate_ca_certificate --&gt; root_ca: signed by
-root_ca_certificate --&gt; operating_system: trusted by
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972272532-636');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+root_ca_certificate --&gt; operating_system: trusted by</p>
+<p>@enduml</p>
 <p>Let's explore how the certificates get checked by the client.</p>
-
-<div class="plantuml-container" id="plantuml-1760972273394-521">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972273394-521">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972273394-521">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972273394-521">
-    <img src="/posts/understanding_ssl/understanding_ssl_003.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972273394-521">
-    <pre><code>@startuml
-start
-:receive certificate;
+<p>@startuml</p>
+<p>start</p>
+<p>:receive certificate;
 :start walking chain of trust;
 floating note right
 the certificate usually contains
@@ -289,28 +219,8 @@ stop
 else (no)
 :failure;
 end
-endif
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972273394-521');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+endif</p>
+<p>@enduml</p>
 
   </div>
 </div>

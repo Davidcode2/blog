@@ -95,57 +95,27 @@
 networks, TLS, Client Server communication, server to server communication.
 Playing around with PlantUML might help with that. It also has the nice side effect
 of giving me some practice with PlantUML.</p>
-
-<div class="plantuml-container" id="plantuml-1760972270233-492">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972270233-492">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972270233-492">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972270233-492">
-    <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_001.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972270233-492">
-    <pre><code>@startuml
-skinparam componentStyle rectangle
-rectangle Server {
+<p>@startuml</p>
+<p>skinparam componentStyle rectangle</p>
+<p>rectangle Server {
 rectangle Nginx {
-component "Backend"
-component "Keycloak"
+component &quot;Backend&quot;
+component &quot;Keycloak&quot;
 }
-}
-rectangle "Public Internet" as public_internet
-[Browser] -&gt; [Backend] : request
+}</p>
+<p>rectangle &quot;Public Internet&quot; as public_internet</p>
+<p>[Browser] -&gt; [Backend] : request
 [Browser] --&gt; [Keycloak] : authenticate
 [Backend] --&gt; public_internet
-public_internet --&gt; [Keycloak] : userinfo
-note left of public_internet
+public_internet --&gt; [Keycloak] : userinfo</p>
+<p>note left of public_internet
 I need to send the request to
 keycloak via the public internet
 because I do not have
 internal TLS set up
 in my docker network
-end note
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972270233-492');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+end note</p>
+<p>@enduml</p>
 <p>I learned that Nginx does not encrypt the packet as it is shown below. Instead
 a TLS handshake is carried out between the Backend (which is the client in this case) and Keycloak, which
 acts as the server. For this the client initiates a connection request to the server.</p>
@@ -171,64 +141,34 @@ decrypt it.</p>
 secret to derive a master secret. For this, previously exchanged random numbers
 are used.</p>
 <p>The below diagram will have to be updated with this new found understanding.</p>
-
-<div class="plantuml-container" id="plantuml-1760972271428-295">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972271428-295">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972271428-295">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972271428-295">
-    <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_002.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972271428-295">
-    <pre><code>@startuml
-!pragma teoz true
+<p>@startuml</p>
+<p>!pragma teoz true
 skinparam BoxPadding 5
-skinparam ParticipantPadding 5
-participant "Public Internet" order 50
-Browser -&gt; Nginx : GET api/cart
-note left Nginx: Nginx terminates TLS
-Nginx -&gt; Backend ++ : proxy_pass :3000
+skinparam ParticipantPadding 5</p>
+<p>participant &quot;Public Internet&quot; order 50</p>
+<p>Browser -&gt; Nginx : GET api/cart</p>
+<p>note left Nginx: Nginx terminates TLS</p>
+<p>Nginx -&gt; Backend ++ : proxy_pass :3000
 Backend -&gt; Nginx : GET realm/userinfo
 note left Backend: Initiate encrypted transfer
-Nginx -&gt; "Public Internet" : GET realm/userinfo
-"Public Internet" --&gt; Nginx : :443
+Nginx -&gt; &quot;Public Internet&quot; : GET realm/userinfo
+&quot;Public Internet&quot; --&gt; Nginx : :443
 Nginx -&gt; Keycloak ++ : proxy_pass :8080
 Keycloak --&gt; Nginx -- : userinfo
-Nginx -&gt; "Public Internet" : 168.290.592.104
-"Public Internet" --&gt; Nginx
+Nginx -&gt; &quot;Public Internet&quot; : 168.290.592.104
+&quot;Public Internet&quot; --&gt; Nginx
 Nginx -&gt; Backend : proxy_pass :3000
 Backend -&gt; Backend : authenticate
 Backend --&gt; Nginx --
-Nginx --&gt; Browser : response
-box "Server" #c1cde6
-box "Docker Network"
-participant Nginx
+Nginx --&gt; Browser : response</p>
+<p>box &quot;Server&quot; #c1cde6</p>
+<p>box &quot;Docker Network&quot;</p>
+<p>participant Nginx
 participant Backend
-participant Keycloak
-end box
-end box
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972271428-295');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+participant Keycloak</p>
+<p>end box</p>
+<p>end box</p>
+<p>@enduml</p>
 <p>One issue I have with creating plantUML diagrams is that I build them in my
 notes directory - separate from my blog - and copy the images over when done.
 This is a bit of a hassle and needs to be optimized. Thus I will put my
@@ -237,17 +177,7 @@ for the <code>@startuml</code> and <code>@enduml</code> tags. When these show up
 section where the viewer can toggle between the code and the image. And because
 I am lazy and I have other things to do, I'll let Gemini do that for me.</p>
 <p>Let's see how it does:</p>
-
-<div class="plantuml-container" id="plantuml-1760972273126-203">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972273126-203">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972273126-203">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972273126-203">
-    <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_004.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972273126-203">
-    <pre><code>@startuml
+<pre><code class="hljs">@startuml
 
 Alice -&gt; Bob : does it work?
 Bob --&gt; Alice : we'll see...
@@ -257,62 +187,12 @@ Bob --&gt; Charline : That's right!
 
 @enduml
 </code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972273126-203');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
 <p>Let me put another UML Diagram right here:</p>
-
-<div class="plantuml-container" id="plantuml-1760972272272-946">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972272272-946">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972272272-946">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972272272-946">
-    <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_003.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972272272-946">
-    <pre><code>@startuml
-[component1] --&gt; [componentX]
+<p>@startuml</p>
+<p>[component1] --&gt; [componentX]
 [component1] --&gt; [component2]
-[component2] -&gt; [component3]
-@enduml</code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972272272-946');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
+[component2] -&gt; [component3]</p>
+<p>@enduml</p>
 <p>Now I have a concrete use case for a plantUML diagram relating to this blog.
 Currently, the transform code which parses each blog post and checks whether it
 can find plantUML code blocks will create an image for each code block it
@@ -325,31 +205,21 @@ on any change in the code base.</p>
 changed.</p>
 <p>The goal is to have only one image for each diagram in a post at any given time.</p>
 <p>Let's draw it up:</p>
-
-<div class="plantuml-container" id="plantuml-1760972273844-110">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972273844-110">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972273844-110">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972273844-110">
-    <img src="/posts/playing_around_with_architecture_diagrams/playing_around_with_architecture_diagrams_005.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972273844-110">
-    <pre><code>@startuml
+<pre><code class="hljs">@startuml
 
 skinparam componentStyle rectangle
 
 component markdown
 rectangle {
-    component "11ty" as 11ty
-    component "PlantUml Transform" as transform
+    component &quot;11ty&quot; as 11ty
+    component &quot;PlantUml Transform&quot; as transform
     note top of transform
         Iterate over uml blocks
         and append index 
         to output file
     end note
 }
-component "plantUml Image" as png
+component &quot;plantUml Image&quot; as png
 actor user 
 
 user -&gt; markdown : changes and saves
@@ -359,26 +229,6 @@ transform -&gt; png : creates
 
 @enduml
 </code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972273844-110');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
 <p>For the file names of the generated PNGs I use the same convention as plantUML
 does. This means that when I manually run plantUML, it will just update the
 existing images instead of creating new ones.</p>

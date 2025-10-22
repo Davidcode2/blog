@@ -94,17 +94,7 @@
   <p>Let's see how a user could potentially mess around with
 my web app. We'll explore different attack vectors and
 see how we could mitigate them.</p>
-
-<div class="plantuml-container" id="plantuml-1760972272659-9">
-  <div class="tabs">
-    <button class="tab-button active" data-tab="image-plantuml-1760972272659-9">Image</button>
-    <button class="tab-button" data-tab="code-plantuml-1760972272659-9">Code</button>
-  </div>
-  <div class="tab-content" data-tab-content="image-plantuml-1760972272659-9">
-    <img src="/posts/securing_a_webapp_001.png" alt="PlantUML Diagram">
-  </div>
-  <div class="tab-content hidden" data-tab-content="code-plantuml-1760972272659-9">
-    <pre><code>@startuml
+<pre><code class="hljs">@startuml
 
 !include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
@@ -116,10 +106,10 @@ see how we could mitigate them.</p>
 !include osaPuml/Server/all.puml
 !include osaPuml/Site/all.puml
 
-Person(bad_actor, "Jimmy", "Bad actor", $sprite="osa_user_black_hat")
+Person(bad_actor, &quot;Jimmy&quot;, &quot;Bad actor&quot;, $sprite=&quot;osa_user_black_hat&quot;)
 
-System_Boundary(boundary, "Teachly System", $link="https://github.com/davidcode2/teachme") {
-    Container(webapi, "Web API")
+System_Boundary(boundary, &quot;Teachly System&quot;, $link=&quot;https://github.com/davidcode2/teachme&quot;) {
+    Container(webapi, &quot;Web API&quot;)
 }
 
 bad_actor -&gt; webapi : access stuff without permission
@@ -129,26 +119,6 @@ bad_actor -&gt; webapi : write tons of stuff to my database
 
 @enduml
 </code></pre>
-  </div>
-</div>
-<script>
-  (function() {
-    const container = document.getElementById('plantuml-1760972272659-9');
-    const buttons = container.querySelectorAll('.tab-button');
-    const contents = container.querySelectorAll('.tab-content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        buttons.forEach(btn => btn.classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-        button.classList.add('active');
-        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
-      });
-    });
-  })();
-</script>
-
 <h2>Endpoint spamming</h2>
 <p>First we'll look at the issue of &quot;Endpoint spamming&quot;. This is when an attacker
 tries to overload the server with requests. The server will try to serve all
