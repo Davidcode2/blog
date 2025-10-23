@@ -484,6 +484,11 @@
       }
     }
   }
+  .sm\:-ml-8 {
+    @media (width >= 40rem) {
+      margin-left: calc(var(--spacing) * -8);
+    }
+  }
   .sm\:flex {
     @media (width >= 40rem) {
       display: flex;
@@ -497,11 +502,6 @@
   .sm\:py-0 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 0);
-    }
-  }
-  .md\:-ml-8 {
-    @media (width >= 48rem) {
-      margin-left: calc(var(--spacing) * -8);
     }
   }
   .xl\:flex-row {
