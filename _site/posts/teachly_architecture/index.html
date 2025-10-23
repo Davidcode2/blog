@@ -95,13 +95,23 @@
 project. I'll use the C4 diagrams to get an understanding of how everything fits
 together.</p>
 <p><strong>Context</strong></p>
-<pre><code class="hljs">@startuml
+
+<div class="plantuml-container" id="plantuml-1761217206676-754">
+  <div class="tabs">
+    <button class="tab-button active" data-tab="image-plantuml-1761217206676-754">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1761217206676-754">Code</button>
+  </div>
+  <div class="tab-content" data-tab-content="image-plantuml-1761217206676-754">
+    <img src="/posts/teachly_architecture/teachly_architecture_001.png" alt="PlantUML Diagram">
+  </div>
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1761217206676-754">
+    <pre><code>@startuml
 
 !include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-Person(personAlias, &quot;User&quot;, &quot;Teacher or Refendar&quot;)
-System(systemAlias, &quot;Teachly&quot;)
-System_Ext(paymentProvider, &quot;Payment Provider&quot;)
+Person(personAlias, "User", "Teacher or Refendar")
+System(systemAlias, "Teachly")
+System_Ext(paymentProvider, "Payment Provider")
 
 personAlias --&gt; systemAlias : browse materials
 personAlias --&gt; systemAlias : upload materials
@@ -110,28 +120,58 @@ systemAlias -&gt; paymentProvider : delegate payment handling
 
 @enduml
 </code></pre>
+  </div>
+</div>
+<script>
+  (function() {
+    const container = document.getElementById('plantuml-1761217206676-754');
+    const buttons = container.querySelectorAll('.tab-button');
+    const contents = container.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.add('hidden'));
+        button.classList.add('active');
+        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
+      });
+    });
+  })();
+</script>
+
 <p><strong>Containers</strong></p>
-<pre><code class="hljs">@startuml
+
+<div class="plantuml-container" id="plantuml-1761217208320-975">
+  <div class="tabs">
+    <button class="tab-button active" data-tab="image-plantuml-1761217208320-975">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1761217208320-975">Code</button>
+  </div>
+  <div class="tab-content" data-tab-content="image-plantuml-1761217208320-975">
+    <img src="/posts/teachly_architecture/teachly_architecture_002.png" alt="PlantUML Diagram">
+  </div>
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1761217208320-975">
+    <pre><code>@startuml
 
 !include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-Person(person, &quot;User&quot;, &quot;Teacher or Refendar&quot;)
+Person(person, "User", "Teacher or Refendar")
 
-System_Boundary(boundary, &quot;Teachly System&quot;, $link=&quot;https://github.com/davidcode2/teachme&quot;) {
+System_Boundary(boundary, "Teachly System", $link="https://github.com/davidcode2/teachme") {
 
-    Container(webapi, &quot;Web API&quot;, &quot;Nest.js&quot;, $descr=&quot;Provides API for uploading, searching and buying materials&quot;, $link=&quot;https://github.com/davidcode2/teachme/be&quot;)
+    Container(webapi, "Web API", "Nest.js", $descr="Provides API for uploading, searching and buying materials", $link="https://github.com/davidcode2/teachme/be")
 
-    Container(webfe, &quot;Single Page App&quot;, &quot;React&quot;, $descr=&quot;Web UI&quot;, $link=&quot;https://github.com/davidcode2/teachme/fe&quot;)
+    Container(webfe, "Single Page App", "React", $descr="Web UI", $link="https://github.com/davidcode2/teachme/fe")
 
-    Container(idp, &quot;Identity Provider&quot;, &quot;Keycloak&quot;, $descr=&quot;Identity provider for authentication and authorization&quot;, $link=&quot;https://github.com/davidcode2/teachme/keycloak&quot;)
+    Container(idp, "Identity Provider", "Keycloak", $descr="Identity provider for authentication and authorization", $link="https://github.com/davidcode2/teachme/keycloak")
 
-    ContainerDb(database, &quot;Database&quot;, &quot;Postgres&quot;, $descr=&quot;Database for storing material references, users, carts, etc.&quot;, $link=&quot;https://github.com/davidcode2/teachme&quot;)
+    ContainerDb(database, "Database", "Postgres", $descr="Database for storing material references, users, carts, etc.", $link="https://github.com/davidcode2/teachme")
 
-    ContainerDb(file_store, &quot;File storage&quot;, &quot;Docker volume&quot;, $descr=&quot;Folder storing materials (PDF), previews and thumbnails (PNG)&quot;, $link=&quot;https://github.com/davidcode2/teachme&quot;)
+    ContainerDb(file_store, "File storage", "Docker volume", $descr="Folder storing materials (PDF), previews and thumbnails (PNG)", $link="https://github.com/davidcode2/teachme")
 
 }
 
-Container_Ext(paymentProvider, &quot;Payment provider&quot;, &quot;Stripe&quot;, $descr=&quot;Payment provider handling payments&quot;, $link=&quot;https://github.com/davidcode2/teachme/be&quot;)
+Container_Ext(paymentProvider, "Payment provider", "Stripe", $descr="Payment provider handling payments", $link="https://github.com/davidcode2/teachme/be")
 
 person --&gt; webfe : access web ui
 webfe -&gt; idp : redirect user for sign in
@@ -143,45 +183,75 @@ webapi --&gt; file_store : store + retrieve
 
 @enduml
 </code></pre>
+  </div>
+</div>
+<script>
+  (function() {
+    const container = document.getElementById('plantuml-1761217208320-975');
+    const buttons = container.querySelectorAll('.tab-button');
+    const contents = container.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.add('hidden'));
+        button.classList.add('active');
+        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
+      });
+    });
+  })();
+</script>
+
 <p>There's a reverse proxy in front of the other containers which terminates SSL.
 Each container runs in a docker container behind its own nginx server.</p>
 <p><strong>Components</strong></p>
 <p>The component diagram looks like a mess. I wonder whether a messy architecture
 diagram equals a messy architecture or if this could be okay as it is.</p>
-<pre><code class="hljs">@startuml
+
+<div class="plantuml-container" id="plantuml-1761217209829-331">
+  <div class="tabs">
+    <button class="tab-button active" data-tab="image-plantuml-1761217209829-331">Image</button>
+    <button class="tab-button" data-tab="code-plantuml-1761217209829-331">Code</button>
+  </div>
+  <div class="tab-content" data-tab-content="image-plantuml-1761217209829-331">
+    <img src="/posts/teachly_architecture/teachly_architecture_003.png" alt="PlantUML Diagram">
+  </div>
+  <div class="tab-content hidden" data-tab-content="code-plantuml-1761217209829-331">
+    <pre><code>@startuml
 
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-Container_Boundary(boundary, &quot;Web API&quot;) {
+Container_Boundary(boundary, "Web API") {
 
   together {
-    Component(userController, &quot;Users Controller&quot;, $descr=&quot;GET, POST, PATCH&quot;)
-    Component(authorController, &quot;Author Controller&quot;, $descr=&quot;GET&quot;)
-    Component(materialController, &quot;Materials Controller&quot;, $descr=&quot;GET, POST, PATCH, DELETE&quot;)
-    Component(cartController, &quot;Carts Controller&quot;, $descr=&quot;GET, POST, DELETE&quot;)
-    Component(stripeController, &quot;Stripe Controller&quot;, $descr=&quot;GET, POST&quot;)
-    Component(authController, &quot;Auth Controller&quot;, $descr=&quot;GET, POST&quot;)
+    Component(userController, "Users Controller", $descr="GET, POST, PATCH")
+    Component(authorController, "Author Controller", $descr="GET")
+    Component(materialController, "Materials Controller", $descr="GET, POST, PATCH, DELETE")
+    Component(cartController, "Carts Controller", $descr="GET, POST, DELETE")
+    Component(stripeController, "Stripe Controller", $descr="GET, POST")
+    Component(authController, "Auth Controller", $descr="GET, POST")
   }
 
   together {
-    Component(materialService, &quot;Materials Service&quot;, $descr=&quot;&quot;)
-    Component(cartService, &quot;Carts Service&quot;, $descr=&quot;&quot;)
-    Component(userService, &quot;Users Service&quot;, $descr=&quot;&quot;)
-    Component(stripeService, &quot;Stripe Service&quot;, $descr=&quot;&quot;)
+    Component(materialService, "Materials Service", $descr="")
+    Component(cartService, "Carts Service", $descr="")
+    Component(userService, "Users Service", $descr="")
+    Component(stripeService, "Stripe Service", $descr="")
   }
 
-  Component(commonCartService, &quot;Common Carts Service&quot;, $descr=&quot;&quot;)
-  Component(consumerService, &quot;Consumers Service&quot;, $descr=&quot;&quot;)
-  Component(authService, &quot;Auth Service&quot;, $descr=&quot;&quot;)
-  Component(authorService, &quot;Author Service&quot;, $descr=&quot;&quot;)
-  Component(imageService, &quot;Image Service&quot;, $descr=&quot;&quot;)
-  Component(materialFinderService, &quot;Material PriceId Finder Service&quot;, $descr=&quot;&quot;)
+  Component(commonCartService, "Common Carts Service", $descr="")
+  Component(consumerService, "Consumers Service", $descr="")
+  Component(authService, "Auth Service", $descr="")
+  Component(authorService, "Author Service", $descr="")
+  Component(imageService, "Image Service", $descr="")
+  Component(materialFinderService, "Material PriceId Finder Service", $descr="")
 
 }
 
-ContainerDb(database, &quot;Database&quot;, &quot;Postgres&quot;, $descr=&quot;Database for storing material references, users, carts, etc.&quot;, $link=&quot;https://github.com/davidcode2/teachme&quot;)
+ContainerDb(database, "Database", "Postgres", $descr="Database for storing material references, users, carts, etc.", $link="https://github.com/davidcode2/teachme")
 
-Container_Ext(stripe, &quot;Stripe API&quot;)
+Container_Ext(stripe, "Stripe API")
 
 cartController --&gt; cartService
 
@@ -211,6 +281,26 @@ authController --&gt; authService
 
 @enduml
 </code></pre>
+  </div>
+</div>
+<script>
+  (function() {
+    const container = document.getElementById('plantuml-1761217209829-331');
+    const buttons = container.querySelectorAll('.tab-button');
+    const contents = container.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.add('hidden'));
+        button.classList.add('active');
+        container.querySelector('.tab-content[data-tab-content="' + tab + '"]').classList.remove('hidden');
+      });
+    });
+  })();
+</script>
+
 <p><strong>Code</strong></p>
 <p>Simon Brown - the creator of C4 - says to not draw code level diagrams when not
 absolutely necessary. Makes sense to me.</p>
