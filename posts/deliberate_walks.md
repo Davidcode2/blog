@@ -1,7 +1,7 @@
 ---
 title: Deliberate Walks
 date: 2025-03-08
-tags: post
+tags: privatepost
 layout: post-layout.njk
 ---
 

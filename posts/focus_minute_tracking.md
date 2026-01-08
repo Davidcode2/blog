@@ -1,7 +1,7 @@
 ---
 title: Focus minute tracking
 date: 2025-03-09
-tags: post
+tags: privatepost
 layout: post-layout.njk
 ---
 
