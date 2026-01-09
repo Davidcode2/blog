@@ -173,3 +173,4 @@ and finding the most efficient way to learn something.
 
 I'm thinking that GenAI enables us to receive fast feedback
 and help iterate toward a better mental representation of something.
+
