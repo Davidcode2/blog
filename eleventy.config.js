@@ -5,6 +5,10 @@ import plantUmlPlugin from "./_11ty/plantuml.js";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 export default function (eleventyConfig) {
+  // Ignore files that should not be processed as templates
+  eleventyConfig.ignores.add("./AGENTS.md");
+  eleventyConfig.ignores.add("./README.md");
+  
   eleventyConfig.addPassthroughCopy("css/output.css");
   eleventyConfig.addPassthroughCopy("assets/favicon");
   eleventyConfig.addPassthroughCopy("admin");
