@@ -121,6 +121,167 @@ bd automatically syncs with git:
 
 For more details, see README.md and docs/QUICKSTART.md.
 
+---
+
+## Project Structure
+
+This is **The Learning Corner** - an 11ty (Eleventy) static site blog with the following structure:
+
+```
+blog/
+├── _includes/              # Nunjucks templates
+│   ├── layout.njk         # Base layout (header, theme toggle, analytics)
+│   └── post-layout.njk    # Post-specific layout wrapper
+├── _11ty/                 # Custom 11ty plugins
+│   └── plantuml.js        # PlantUML diagram generation plugin
+├── posts/                 # Blog posts (Markdown files)
+│   ├── *.md               # Individual posts
+│   └── */                 # Posts with assets (images, diagrams)
+├── assets/                # Static assets (favicons, images)
+├── css/                   # Generated Tailwind CSS output
+├── admin/                 # Decap CMS configuration
+├── _site/                 # Build output (generated, not committed)
+├── eleventy.config.js     # 11ty configuration
+├── tailwind.config.js     # Tailwind CSS configuration
+├── input.css              # Tailwind source styles
+├── package.json           # Node dependencies
+├── dockerfile             # Multi-stage Docker build
+└── nginx.conf             # Nginx server configuration
+```
+
+### Technology Stack
+
+- **Static Site Generator**: 11ty (Eleventy) v3.0
+- **Templating**: Nunjucks (.njk)
+- **Styling**: Tailwind CSS v4.0
+- **Content**: Markdown with YAML frontmatter
+- **Diagrams**: PlantUML (via custom plugin)
+- **CMS**: Decap CMS (Git-based)
+- **Build**: Docker multi-stage build
+- **Deployment**: GitHub Actions → GHCR → Hetzner Cloud server
+
+---
+
+## Working with the Repository
+
+### Prerequisites
+
+- Node.js 22+
+- npm
+- Java 17+ (for PlantUML diagrams)
+- Graphviz (for PlantUML)
+
+### Development Commands
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server (11ty + Tailwind watch)
+npm start
+
+# Build for production
+npm run build
+
+# Build only 11ty
+npm run build:11ty
+
+# Build only CSS
+npm run build:css
+```
+
+### Creating a New Post
+
+Posts are Markdown files in the `posts/` directory with YAML frontmatter:
+
+```markdown
+---
+title: Your Post Title
+date: 2025-03-12
+tags: post
+layout: post-layout.njk
+---
+
+Your content here...
+
+For PlantUML diagrams:
+@startuml
+Client -> Server : request
+Server --> Client : response
+@enduml
+```
+
+**Frontmatter fields:**
+- `title` (required): Post title
+- `date` (required): Publication date (YYYY-MM-DD)
+- `tags: post` (required): Marks as blog post
+- `layout: post-layout.njk` (required): Uses post template
+
+### Adding Images
+
+For posts with images, create a subdirectory:
+```
+posts/
+└── my-post/
+    ├── my-post.md
+    └── image.png
+```
+
+Images in post subdirectories are automatically copied to `_site`.
+
+### PlantUML Diagrams
+
+Include PlantUML diagrams directly in Markdown:
+- Use `@startuml` / `@enduml` blocks
+- Diagrams are rendered during build (production only)
+- Both inline and fenced code blocks supported
+- Generated PNGs include tabbed UI (image/code view)
+
+**Requirements:**
+- Java must be installed
+- PlantUML JAR at `~/.plantuml/plantuml.jar`
+
+### Build Process
+
+1. **Local Development**: `npm start` runs both 11ty server and Tailwind watcher
+2. **Production Build**: Docker multi-stage build
+   - Stage 1: Node.js + Java/Graphviz/PlantUML → builds static site
+   - Stage 2: Nginx Alpine → serves static files
+
+### Deployment Flow
+
+```
+Push to main → GitHub Actions → Build Docker image → Push to GHCR → Deploy to Hetzner
+```
+
+The workflow triggers on:
+- Changes to `posts/**`
+- Manual workflow dispatch
+
+### Useful Patterns
+
+**Date formatting in templates:**
+```nunjucks
+{{ date | formatDate("MMMM d, yyyy") }}
+```
+
+**Accessing post collections:**
+```nunjucks
+{%- for post in collections.post %}
+  {{ post.data.title }}
+  {{ post.url }}
+{%- endfor %}
+```
+
+**TLDR shortcode:**
+```markdown
+{% tldr %}
+Your summary here
+{% endtldr %}
+```
+
+---
+
 ## Landing the Plane (Session Completion)
 
 **When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
