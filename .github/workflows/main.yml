@@ -14,7 +14,7 @@ jobs:
   check-for-changes:
     runs-on: ubuntu-latest
     outputs:
-      posts: ${{ steps.filter.outputs.posts }}
+      src: ${{ steps.filter.outputs.src }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,13 +24,24 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           filters: |
-            posts:
+            src:
               - 'posts/**'
+              - '_includes/**'
+              - '_11ty/**'
+              - 'assets/**'
+              - 'css/**'
+              - 'admin/**'
+              - 'eleventy.config.js'
+              - 'tailwind.config.js'
+              - 'input.css'
+              - 'package*.json'
+              - 'dockerfile'
+              - 'nginx.conf'
 
   build-and-push:
     runs-on: ubuntu-latest
     needs: check-for-changes
-    if: needs.check-for-changes.outputs.posts == 'true' || github.event_name == 'workflow_dispatch'
+    if: needs.check-for-changes.outputs.src == 'true' || github.event_name == 'workflow_dispatch'
 
     permissions:
       contents: read
