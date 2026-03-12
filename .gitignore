@@ -18,3 +18,7 @@ node_modules/
 *feh_*
 
 *.xcf
+
+# Dolt database files (added by bd init)
+.dolt/
+*.db
