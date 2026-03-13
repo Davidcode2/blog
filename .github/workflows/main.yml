@@ -7,6 +7,19 @@ on:
       - main
 
 env:
+  # Repository configuration
+  GITHUB_OWNER: Davidcode2
+  APP_REPO_NAME: blog
+  APP_OF_APPS_REPO: app-of-apps
+
+  # Deployment configuration
+  DEPLOYMENT_DIR: blog
+  DEPLOYMENT_FILE: blog-app-deployment.yaml
+
+  # Build configuration
+  DOCKERFILE: dockerfile
+
+  # Image configuration
   IMAGE_NAME: ${{ github.repository }}
   REGISTRY: ghcr.io
 
@@ -14,134 +27,123 @@ jobs:
   check-for-changes:
     runs-on: ubuntu-latest
     outputs:
-      src: ${{ steps.filter.outputs.src }}
+      should_build: ${{ steps.check.outputs.should_build }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Check for relevant changes
-        id: filter
-        uses: dorny/paths-filter@v3
         with:
-          filters: |
-            src:
-              - 'posts/**'
-              - '_includes/**'
-              - '_11ty/**'
-              - 'assets/**'
-              - 'css/**'
-              - 'admin/**'
-              - 'eleventy.config.js'
-              - 'tailwind.config.js'
-              - 'input.css'
-              - 'package*.json'
-              - 'dockerfile'
-              - 'nginx.conf'
+          fetch-depth: 2
 
-  build-and-push:
+      - name: Check for relevant changes or manual trigger
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "should_build=true" >> $GITHUB_OUTPUT
+            echo "Manual trigger - building"
+          else
+            if git diff --name-only HEAD^ HEAD | grep -qE '^(posts/|_includes/|_11ty/|assets/|css/|admin/|eleventy\.config\.js|tailwind\.config\.js|input\.css|package.*\.json|dockerfile|nginx\.conf)'; then
+              echo "should_build=true" >> $GITHUB_OUTPUT
+              echo "Source changes detected - building"
+            else
+              echo "should_build=false" >> $GITHUB_OUTPUT
+              echo "No source changes - skipping build"
+            fi
+          fi
+
+  bump-version:
     runs-on: ubuntu-latest
     needs: check-for-changes
-    if: needs.check-for-changes.outputs.src == 'true' || github.event_name == 'workflow_dispatch'
+    if: needs.check-for-changes.outputs.should_build == 'true'
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+      sha: ${{ steps.push.outputs.sha }}
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ env.GITHUB_OWNER }}
+          repositories: ${{ env.APP_REPO_NAME }},${{ env.APP_OF_APPS_REPO }}
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Bump patch version in package.json
+        id: bump
+        run: |
+          CURRENT=$(jq -r .version package.json)
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+          NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+          jq --arg v "$NEW_VERSION" '.version = $v' package.json > tmp.json && mv tmp.json package.json
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Bumped version: $CURRENT → $NEW_VERSION"
+
+      - name: Commit version bump
+        id: push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.version }} [skip ci]"
+          git push
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+  build-and-push:
     permissions:
       contents: read
       packages: write
+    uses: ./.github/workflows/build-and-push.yml
+    needs: bump-version
+    with:
+      image_name: ghcr.io/${{ github.repository }}
+      dockerfile: dockerfile
+      ref: ${{ needs.bump-version.outputs.sha }}
+    secrets: inherit
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,enable=true
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-  deploy:
+  deploy-app:
     runs-on: ubuntu-latest
-    needs: build-and-push
+    needs: [bump-version, build-and-push]
     permissions:
-      id-token: write
       contents: read
+    env:
+      VERSION: ${{ needs.bump-version.outputs.version }}
 
     steps:
-      - name: Configure AWS Credentials Action for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4.2.1
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
         with:
-          aws-region: eu-central-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/ci-role 
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ env.GITHUB_OWNER }}
+          repositories: ${{ env.APP_OF_APPS_REPO }}
 
-      - name: Get IP address from SSM
-        id: get-server-ip
-        run: |
-          ip=$(aws ssm get-parameter \
-            --name "/compute/hetzner-cloud-server-1/host" \
-            --query 'Parameter.Value' \
-            --output text)
-          echo "host_ip=$ip" >> "$GITHUB_OUTPUT"
-
-      - name: Retrieve SSH private key from SSM
-        run: |
-          key=$(aws ssm get-parameter \
-            --name "/ssh/hetzner-cloud-server-1/openssl_deployment_private_ssh_key" \
-            --with-decryption \
-            --query 'Parameter.Value' \
-            --output text)
-
-          echo "PRIVATE_SSH_KEY<<EOF" >> $GITHUB_ENV
-          echo "$key" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Start ssh-agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Checkout app-of-apps repo
+        uses: actions/checkout@v4
         with:
-          ssh-private-key: ${{ env.PRIVATE_SSH_KEY }}
+          repository: ${{ env.GITHUB_OWNER }}/${{ env.APP_OF_APPS_REPO }}
+          token: ${{ steps.app-token.outputs.token }}
 
-      - name: Deploy on server
+      - name: Update deployment image tag
+        working-directory: ${{ env.DEPLOYMENT_DIR }}
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ steps.get-server-ip.outputs.host_ip }} << 'EOF'
-            FULL_IMAGE_NAME="ghcr.io/${{ github.repository }}"
-            IMAGE_NAME_LOWER=$(echo "$FULL_IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
-            CONTAINER_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-            NETWORK_NAME=app-network
+          OWNER_LC=$(echo "${{ env.GITHUB_OWNER }}" | tr '[:upper:]' '[:lower:]')
+          REPO_LC=$(echo "${{ env.APP_REPO_NAME }}" | tr '[:upper:]' '[:lower:]')
+          sed -i "s|image: ghcr.io/${OWNER_LC}/${REPO_LC}:.*|image: ghcr.io/${OWNER_LC}/${REPO_LC}:${VERSION}|g" "${{ env.DEPLOYMENT_FILE }}"
+          echo "Updated image tag to ${VERSION}"
 
-            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-
-            docker container stop $CONTAINER_NAME || true
-            docker container rm $CONTAINER_NAME || true
-            docker pull $IMAGE_NAME_LOWER:latest
-
-            docker run -d \
-              --name $CONTAINER_NAME \
-              --network $NETWORK_NAME \
-              $IMAGE_NAME_LOWER:latest
-
-            docker image prune -f
-          EOF
-
-
-
+      - name: Commit and push deployment changes
+        working-directory: ${{ env.DEPLOYMENT_DIR }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --exit-code && echo "No changes to commit" && exit 0
+          git add .
+          git commit -m "deploy: ${{ env.APP_REPO_NAME }} v${VERSION}"
+          git push
