@@ -1,6 +1,6 @@
 ---
 title: "Reaching for deployment Nirvana"
-date: 2025-04-25
+date: 2026-03-23
 layout: post-layout.njk
 tags: post
 ---
@@ -18,9 +18,9 @@ I create a new repository in github using github cli. Depending on the project I
 The application manifest looks essentially the same for all my applications. It points to a dedicated folder in the app-of-apps repo which holds the deployment manifest and everything else that's needed (service, ingress, pvc, etc.).
 The agent can generate those beautifully when given one of the existing applications as a template.
 
-Looking at this high level picture I am quite happy with how it works. It's definitely an improvement over my previous setup where I was sshing my code to my server and triggered a docker compose build && docker compose up there.
+Looking at this high level picture I am quite happy with how it works. It's definitely an improvement over my previous setup where I was sshing my code to my server and triggered a `docker compose build && docker compose up` there.
 
-Let's now look at the areas which still cause some friction. I recently moved my terraform state file from my local computer to an S3 bucket. In and of itself this is nice but it introduced some hurdles regarding permissions. For security I don't wan't my CI role to be able to change its own permissions. This means that whenever I add a new SSM parameter path for a new application I need to locally run `terraform apply` with the updated permissions on the CI role. This is a bit of a pain but I suppose it's manageable. Since I have to update the terraform ci-role, the general ci-role, and the external-secrets-operator role, I could bundle these in a script. That way I at least don't have to write out `terraform apply -target='xyz'` three times. Alternatively I could just do `terraform apply` without arguments, though I'm not sure whether this could cause issues.
+Let's now look at the areas which still cause some friction. I recently moved my terraform state file from my local computer to an S3 bucket. In and of itself this is nice but it introduced some hurdles regarding permissions. For security I don't wan't my CI role to be able to change its own permissions. This means that whenever I add a new SSM parameter path for a new application I need to locally run `terraform apply` with the updated permissions on the CI role. This is a bit of a pain but I suppose it's manageable.
 
 Once the role permissions are updated, the ssm part works smoothly. I have the agent create the required parameters and then simply write my secrets to them once.
 
