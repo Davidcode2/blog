@@ -33,8 +33,9 @@ well specified I should get close enough to one-shotting a website.
 
 What are the manual tasks in my current workflow?
 
+- Running `terraform apply` locally to update the CI-roles
 - Setting the SSM parameters
 - Setting the APP_ID and APP_PRIVATE_KEY as Github secrets for the workflow to be able to update the image version in the app-of-apps repo.
-- Thinking about what I actually want to achieve with the website
+- Thinking about what I actually want to achieve with the project
 
 What a time to be alive.
