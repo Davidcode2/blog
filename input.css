@@ -655,6 +655,10 @@ a {
     gap: 0.2rem;
   }
 
+  .terminal-prompt {
+    font-size: 1rem;
+  }
+
   .terminal-help {
     justify-content: space-between;
     gap: 0.5rem;
