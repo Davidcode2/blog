@@ -240,7 +240,9 @@ a {
 
 .article {
   grid-column: 1 / -1;
+  min-width: 0;
   width: min(100%, 48rem);
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -268,7 +270,9 @@ a {
 }
 
 .markdown {
+  min-width: 0;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
 
 .markdown p {
@@ -319,9 +323,22 @@ a {
 }
 
 .markdown img {
+  display: block;
   max-width: 100%;
   height: auto;
   border-radius: 0.25rem;
+}
+
+.markdown picture,
+.markdown figure,
+.markdown iframe,
+.markdown video {
+  max-width: 100%;
+}
+
+.markdown iframe,
+.markdown video {
+  width: 100%;
 }
 
 .markdown code,
@@ -336,6 +353,9 @@ a {
 
 .markdown pre {
   overflow-x: auto;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
   margin: 1.75rem 0;
   border: 1px solid var(--border);
   border-radius: 0.35rem;
@@ -371,6 +391,8 @@ a {
 
 .plantuml-container {
   display: flex;
+  min-width: 0;
+  max-width: 100%;
   margin: 1.75rem 0;
   border: 1px solid var(--border);
   border-radius: 0.35rem;
@@ -400,6 +422,8 @@ a {
 
 .plantuml-container .tab-content {
   overflow-x: auto;
+  min-width: 0;
+  max-width: 100%;
   padding: 0.75rem;
 }
 
