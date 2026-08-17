@@ -3,12 +3,15 @@ title: The Learning Corner
 layout: layout.njk
 ---
 
-<div class="max-w-[800px]">
-  <h1 class="text-2xl font-bold pb-4">{{ title }}</h1>
+<article class="article">
+  <header class="article-header">
+    <a class="back-link" href="/">← all posts</a>
+    <h1>{{ title }}</h1>
   {% if date %}
-    <div class="text-sm pb-4">{{ date | formatDate("MMMM d, yyyy") }}</div>
+    <time datetime="{{ date | formatDate('yyyy-LL-dd') }}">{{ date | formatDate("MMMM d, yyyy") }}</time>
   {% endif %}
+  </header>
   <div class="markdown">
   {{ content | safe }}
   </div>
-</div>
+</article>

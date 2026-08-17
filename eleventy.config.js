@@ -8,9 +8,11 @@ export default function (eleventyConfig) {
   // Ignore files that should not be processed as templates
   eleventyConfig.ignores.add("./AGENTS.md");
   eleventyConfig.ignores.add("./README.md");
+  eleventyConfig.ignores.add("./.beads/**");
   
   eleventyConfig.addPassthroughCopy("css/output.css");
   eleventyConfig.addPassthroughCopy("assets/favicon");
+  eleventyConfig.addPassthroughCopy("assets/terminal-menu.js");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("posts/*.png", {
     filter: (file) => {
@@ -54,7 +56,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin);
 
-  if (process.env.ELEVENTY_RUN_MODE === "build") {
+  if (process.env.ELEVENTY_RUN_MODE === "build" && process.env.SKIP_PLANTUML !== "true") {
     eleventyConfig.addPlugin(plantUmlPlugin);
   }
 
