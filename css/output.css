@@ -956,6 +956,7 @@ button, a {
 }
 .terminal-results.is-ls {
   grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+  grid-auto-rows: max-content;
   align-content: start;
   column-gap: 0.35rem;
 }
