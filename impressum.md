@@ -8,7 +8,7 @@ layout: post-layout.njk
 **Anbieterkennzeichnung gemäß § 5 DDG**
 
 Jakob Lingel  
-Amselweg 3  
+Räterweg 9  
 73560 Böbingen an der Rems
 
 **Kontakt**  
